@@ -1,0 +1,50 @@
+package com.corelib;
+
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+
+/**
+ * NetworkStatus.java
+ *
+ * Network manipulation.
+ *
+ * @author	Eric Potvin
+ * @version 1.0
+ */
+public class NetworkStatus extends com.corelib.CoreLib {
+
+	// Properties
+	private Context context;
+
+	/**
+	 * Constructor
+	 *
+	 * @param context The context
+	 */
+	public NetworkStatus(Context context){
+		this.context = context;
+	}
+
+	/**
+	 * Check if we have internet connection
+	 *
+	 * @return Success or failure
+	 */
+	public boolean canConnectToInternet() {
+		ConnectivityManager cm = (ConnectivityManager) this.context.getSystemService(Context.CONNECTIVITY_SERVICE);
+		if(cm == null) {
+			return false;
+		}
+		NetworkInfo activeNetworkInfo[] = cm.getAllNetworkInfo();
+		if(activeNetworkInfo == null) {
+			return false;
+		}
+		for(int i = 0; i < activeNetworkInfo.length; i++) {
+			if(activeNetworkInfo[i].getState() == NetworkInfo.State.CONNECTED) {
+				return true;
+			}
+		}
+		return false;
+	}
+}
