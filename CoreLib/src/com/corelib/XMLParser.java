@@ -105,8 +105,14 @@ public class XMLParser extends com.corelib.CoreLib {
 		if(n == null || n.getLength() == 0) {
 			return "";
 		}
+
+		if(str.equals("media:content")) {
+			Element media_content = (Element) n.item(0);
+			return media_content.getAttribute("url");
+		}
+
 		Node child, elem = n.item(0);
-		if( elem == null) {
+		if(elem == null) {
 			return "";
 		}
 		if (!elem.hasChildNodes()) {

@@ -19,6 +19,7 @@ public class FeedItem {
 	String description;
 	String date;
 	String source;
+	String image;
 
 	/**
 	 * Constructor
@@ -33,6 +34,7 @@ public class FeedItem {
 		this.description = "";
 		this.date = "";
 		this.source = "";
+		this.image = "";
 	}
 
 	/**
@@ -57,7 +59,7 @@ public class FeedItem {
 	/**
 	 * Set the id
 	 *
-	 * @param id The id
+	 * @param Integer The id
 	 */
 	public void setId(int id) {
 		this.id = id;
@@ -75,7 +77,7 @@ public class FeedItem {
 	/**
 	 * Set the title
 	 *
-	 * @param title The title
+	 * @param String The title
 	 */
 	public void setTitle(String title) {
 		this.title = title;
@@ -93,7 +95,7 @@ public class FeedItem {
 	/**
 	 * Set the link
 	 *
-	 * @param link The link
+	 * @param String The link
 	 */
 	public void setLink(String link) {
 		this.link = link;
@@ -111,7 +113,7 @@ public class FeedItem {
 	/**
 	 * Set the guid
 	 *
-	 * @param guid The guid
+	 * @param String The guid
 	 */
 	public void setGuid(String guid) {
 		this.guid = guid;
@@ -129,7 +131,7 @@ public class FeedItem {
 	/**
 	 * Set the category
 	 *
-	 * @param category The category
+	 * @param String The category
 	 */
 	public void setCategory(String category) {
 		this.category = category;
@@ -147,7 +149,7 @@ public class FeedItem {
 	/**
 	 * Set the description
 	 *
-	 * @param description The description
+	 * @param String The description
 	 */
 	public void setDescription(String description) {
 		this.description = description;
@@ -165,7 +167,7 @@ public class FeedItem {
 	/**
 	 * Set the date
 	 *
-	 * @param date The date
+	 * @param String The date
 	 */
 	public void setDate(String date) {
 		this.date = date;
@@ -183,10 +185,27 @@ public class FeedItem {
 	/**
 	 * Set the source
 	 *
-	 * @param source The source
+	 * @param String The source
 	 */
 	public void setSource(String source) {
 		this.source = source;
 	}
 
+	/**
+	 * Get the image
+	 *
+	 * @return The image
+	 */
+	public String getImage() {
+		return image;
+	}
+
+	/**
+	 * Set the image
+	 *
+	 * @param String The image
+	 */
+	public void setImage(String image) {
+		this.image = image;
+	}
 }

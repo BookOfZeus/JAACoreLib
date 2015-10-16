@@ -5,7 +5,7 @@ import java.io.*;
 public class FileCacheTest extends CoreLibTest {
 
 	private static String FILENAME_TEST = "/tmp/test_random_file.txt";
-	private static String BAD_FOLDER		= "/bad_folder";
+	private static String BAD_FOLDER	= "/bad_folder";
 	private static String FILE_CONTENT	= "Java UnitTest Content";
 
 	// Start test

@@ -35,5 +35,5 @@ eg:
 
 Or if you need to include specific jars:
 
-	java -classpath .:./CoreLib.jar:./Jar/* DownloaderServiceTest
+	java -classpath .:./CoreLib.jar:./Jar/* DownloaderServiceTest.java
 

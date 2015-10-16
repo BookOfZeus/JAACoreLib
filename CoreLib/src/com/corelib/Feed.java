@@ -62,6 +62,10 @@ public class Feed extends com.corelib.CoreLib {
 	 * RSS source key string
 	 */
 	private static final String KEY_RSS_SOURCE   = "source";
+	/**
+	 * Image key string
+	 */
+	private static final String KEY_RSS_IMAGE   = "media:content";
 
 	/**
 	 * Sitemap parent key string
@@ -213,6 +217,7 @@ public class Feed extends com.corelib.CoreLib {
 					fi.setSource(xmlParser.getValue(e, KEY_RSS_SOURCE));
 					fi.setCategory(xmlParser.getValue(e, KEY_RSS_CATEGORY));
 					fi.setDate(xmlParser.getValue(e, KEY_RSS_DATE));
+					fi.setImage(xmlParser.getValue(e, KEY_RSS_IMAGE));
 				}
 				this.feeds.add(fi);
 			}
