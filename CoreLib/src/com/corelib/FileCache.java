@@ -37,9 +37,15 @@ public class FileCache extends com.corelib.CoreLib {
 	 */
 	final static private String ERROR_CREATE_FILE = "Cannot create file";
 
+	/**
+	 * The image cache path
+	 */
+	final static private String IMAGE_CACHE_PATH = "image_cache";
+
 	// Properties
 	String filename;
 	File file;
+	File cacheDir;
 
 	/**
 	 * Constructor
@@ -63,6 +69,36 @@ public class FileCache extends com.corelib.CoreLib {
 	}
 
 	/**
+	 * Constructor
+	 *
+	 * @param path The external storage mounted path
+	 * @param file The filename
+	 */
+	public FileCache(File path) {
+		//Find the dir to save cached images
+		if (android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED)) {
+			cacheDir = new File(android.os.Environment.getExternalStorageDirectory(), this.IMAGE_CACHE_PATH);
+		}
+		else {
+			cacheDir = path;
+		}
+		if(!cacheDir.exists()) {
+			cacheDir.mkdirs();
+		}
+	}
+
+	/**
+	 * Get the file from a URL
+	 *
+	 * @param url The URL to fetch
+	 * @return File Object
+	 */
+	public File getFile(String url){
+		this.filename = String.valueOf(url.hashCode());
+		return new File(this.cacheDir, this.filename);
+	}
+
+	/**
 	 * Save a file
 	 *
 	 * @param content The content of the file
@@ -80,7 +116,7 @@ public class FileCache extends com.corelib.CoreLib {
 		try {
 			BufferedWriter bw = new BufferedWriter(
 					new FileWriter(this.filename)
-			);
+					);
 			bw.write(content);
 			bw.close();
 			saved = true;
@@ -108,7 +144,7 @@ public class FileCache extends com.corelib.CoreLib {
 
 			BufferedReader br = new BufferedReader(
 					new FileReader(this.filename)
-			);
+					);
 			while((read = br.readLine()) != null) {
 				builder.append(read);
 			}
@@ -179,6 +215,20 @@ public class FileCache extends com.corelib.CoreLib {
 			return false;
 		}
 		return this.file.delete();
+	}
+
+	/**
+	 * Clear the cache folder
+	 * 
+	 */
+	public void clear(){
+		File[] files = cacheDir.listFiles();
+		if(files == null) {
+			return;
+		}
+		for(File f:files) {
+			f.delete();
+		}
 	}
 
 	/**

@@ -1,5 +1,8 @@
 package com.corelib;
 
+import java.io.InputStream;
+import java.io.OutputStream;
+
 /**
  * Utils.java
  *
@@ -42,4 +45,38 @@ public class Utils {
 		return String.format("%1$" + n + "s", s);  
 	}
 
+	/**
+	 * Convert pixel to DP
+	 *
+	 * @param dentisty The density ratio
+	 * @param pixels The pixels size
+	 * @return size in DP
+	 */
+	public static int convertPXToDP(float density, int pixels) {
+		return (int) (pixels * density + 0.5f);
+	}
+
+	/**
+	 * Copy input stream to an output stream
+	 *
+	 * @param is Input stream
+	 * @param os Output stream
+	 */
+	public static void CopyStream(InputStream is, OutputStream os)
+	{
+		final int buffer_size = 1024;
+		try {
+			byte[] bytes=new byte[buffer_size];
+			for(;;) {
+				int count=is.read(bytes, 0, buffer_size);
+				if(count==-1) {
+					break;
+				}
+				os.write(bytes, 0, count);
+			}
+		}
+		catch(Exception ex) {
+			//
+		}
+	}
 }

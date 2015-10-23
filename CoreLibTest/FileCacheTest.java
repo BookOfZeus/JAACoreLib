@@ -112,12 +112,12 @@ public class FileCacheTest extends CoreLibTest {
 		int valid = 0;
 
 		/* Here you will have to specify your own files */
-		String file = "/home/eric/Git/JAACoreLib/README.md";
+		String file = "/etc/hosts";
 
 		// Older than 1 day
 		FileCache fc = new FileCache(file);
 
-		valid += this.assertFalse("test_fileIsOld failed: '" + file + "' is older than 12 hours", fc.isOld(Calendar.HOUR, 12));
+		valid += this.assertTrue("test_fileIsOld failed: '" + file + "' is older than 12 hours", fc.isOld(Calendar.HOUR, 12));
 		
 		valid += this.assertTrue("test_fileIsOld failed: '" + file + "' is older than 1 minute", fc.isOld(Calendar.MINUTE, 1));
 		

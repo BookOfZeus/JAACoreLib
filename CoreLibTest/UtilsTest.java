@@ -16,10 +16,10 @@ public class UtilsTest extends CoreLibTest {
 		String result = "Awesome";
 
 		String str1 = "awesome";
-		valid += this.assertTrue("test_capitalize failed: the string shoul be '" + result + "'", result.equals(Utils.capitalize(str1)));
+		valid += this.assertTrue("test_capitalize failed: the string should be '" + result + "'", result.equals(Utils.capitalize(str1)));
 
 		String str2 = "Awesome";
-		valid += this.assertTrue("test_capitalize failed: the string shoul be '" + result + "'", result.equals(Utils.capitalize(str2)));
+		valid += this.assertTrue("test_capitalize failed: the string should be '" + result + "'", result.equals(Utils.capitalize(str2)));
 
 		return valid;
 	}
@@ -32,11 +32,11 @@ public class UtilsTest extends CoreLibTest {
 		String result15 = "Awesome        ";
 		String str = "Awesome";
 
-		valid += this.assertTrue("test_capitalize failed: the string shoul be '" + result7 + "'", result7.equals(Utils.padRight(str, 7)));
-		valid += this.assertTrue("test_capitalize failed: the string shoul be '" + result7 + "'", result10.equals(Utils.padRight(str, 10)));
-		valid += this.assertTrue("test_capitalize failed: the string shoul be '" + result7 + "'", result15.equals(Utils.padRight(str, 15)));
+		valid += this.assertTrue("test_capitalize failed: the string should be '" + result7 + "'", result7.equals(Utils.padRight(str, 7)));
+		valid += this.assertTrue("test_capitalize failed: the string should be '" + result7 + "'", result10.equals(Utils.padRight(str, 10)));
+		valid += this.assertTrue("test_capitalize failed: the string should be '" + result7 + "'", result15.equals(Utils.padRight(str, 15)));
 
-		valid += this.assertFalse("test_capitalize failed: the string shoul be '" + result7 + "'", result15.equals(Utils.padRight(str, 7)));
+		valid += this.assertFalse("test_capitalize failed: the string should be '" + result7 + "'", result15.equals(Utils.padRight(str, 7)));
 
 		return valid;
 	}
@@ -49,11 +49,28 @@ public class UtilsTest extends CoreLibTest {
 		String result15 = "        Awesome";
 		String str = "Awesome";
 
-		valid += this.assertTrue("test_capitalize failed: the string shoul be '" + result7 + "'", result7.equals(Utils.padLeft(str, 7)));
-		valid += this.assertTrue("test_capitalize failed: the string shoul be '" + result7 + "'", result10.equals(Utils.padLeft(str, 10)));
-		valid += this.assertTrue("test_capitalize failed: the string shoul be '" + result7 + "'", result15.equals(Utils.padLeft(str, 15)));
+		valid += this.assertTrue("test_capitalize failed: the string should be '" + result7 + "'", result7.equals(Utils.padLeft(str, 7)));
+		valid += this.assertTrue("test_capitalize failed: the string should be '" + result7 + "'", result10.equals(Utils.padLeft(str, 10)));
+		valid += this.assertTrue("test_capitalize failed: the string should be '" + result7 + "'", result15.equals(Utils.padLeft(str, 15)));
 
-		valid += this.assertFalse("test_capitalize failed: the string shoul be '" + result7 + "'", result15.equals(Utils.padLeft(str, 7)));
+		valid += this.assertFalse("test_capitalize failed: the string should be '" + result7 + "'", result15.equals(Utils.padLeft(str, 7)));
+
+		return valid;
+	}
+
+	private int test_convertPXToDP() {
+
+		int valid = 0;
+		float density;
+		int pixel;
+
+		density = 1;
+		pixel = 10;
+		valid += this.assertTrue("convertPXToDP failed: the DP should be '11'", Utils.convertPXToDP(density, pixel) == 11);
+
+		density = 2.5f;
+		pixel = 50;
+		valid += this.assertTrue("convertPXToDP failed: the DP should be '11'", Utils.convertPXToDP(density, pixel) == 126);
 
 		return valid;
 	}
