@@ -34,7 +34,7 @@ public class Password extends com.corelib.CoreLib {
 	/**
 	 * Default special characters
 	 */
-	private static final String SPECIAL	= "!@#$%^&*_=+-/";
+	private static final String SPECIAL	= "!@#$%^&*_=+-/|";
 	/**
 	 * Use upper case?
 	 */
@@ -82,6 +82,7 @@ public class Password extends com.corelib.CoreLib {
 	 * @return String
 	 */
 	public String generate(int len) {
+		len = Math.min(len, 14);
 
 		int lenAlphaL = Password.ALPHA_L.length();
 		int lenAlphaU = Password.ALPHA_U.length();
@@ -100,7 +101,7 @@ public class Password extends com.corelib.CoreLib {
 			out = Utils.shuffle(out.toString());
 		}
 		if(this.useDigit) {
-			out.append(Password.NUM);
+			out.append(Password.NUM).append(Password.NUM);
 			out = Utils.shuffle(out.toString());
 		}
 		if(this.useSpecial) {

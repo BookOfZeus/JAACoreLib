@@ -4,6 +4,22 @@ import java.io.*;
 public class PasswordTest extends CoreLibTest {
 
 	// Start test
+	private int test_len() {
+		int valid = 0;
+		double score = 0;
+		String p;
+
+		Password p1 = new Password();
+		p = p1.generate();
+		valid += this.assertTrue("test_run failed: should be 8: " + p.length(), p.length() == 8);
+
+		Password p2 = new Password();
+		p = p2.generate(1444);
+		valid += this.assertTrue("test_run failed: should be 8: " + p.length(), p.length() == 14);
+
+		return valid;
+	}
+
 
 	private int test_gen() {
 		int valid = 0;
@@ -62,7 +78,7 @@ public class PasswordTest extends CoreLibTest {
 		pass = pDS.generate(4);
 		//System.out.println(pass);
 		score = Password.getScore(pass);
-		valid += this.assertTrue("test_run failed: digit + Special 4 score should be : "+score, score == 50);
+		valid += this.assertTrue("test_run failed: digit + Special 4 score should be : "+score, score == 34);
 
 		// digit + Special
 		Password pDS2 = new Password();
@@ -72,7 +88,7 @@ public class PasswordTest extends CoreLibTest {
 		pass = pDS2.generate(8);
 		//System.out.println(pass);
 		score = Password.getScore(pass);
-		valid += this.assertTrue("test_run failed: digit + Special 8 score should be : "+score, score == 54);
+		valid += this.assertTrue("test_run failed: digit + Special 8 score should be : "+score, score >= 50 && score <= 60);
 
 		return valid;
 	}
@@ -151,6 +167,9 @@ public class PasswordTest extends CoreLibTest {
 	public void runTests() {
 		int valid = 0;
 		PasswordTest test = new PasswordTest();
+
+		// len
+		valid += test.test_len();
 
 		// generate
 		valid += test.test_gen();
