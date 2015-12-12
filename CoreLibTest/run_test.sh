@@ -4,6 +4,10 @@ clear ;
 
 if [ -z $1 ]; then
 	echo "For what class?"
+	for f in `ls *.java -1`
+	do
+		echo " - $f";
+	done
 	exit 1;
 fi
 
