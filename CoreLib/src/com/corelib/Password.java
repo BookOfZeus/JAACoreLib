@@ -7,6 +7,8 @@ import java.util.Collections;
 import java.lang.Math;
 import java.text.DecimalFormat;
 
+import com.corelib.Utils;
+
 /**
  * Password.java
  *
@@ -33,6 +35,34 @@ public class Password extends com.corelib.CoreLib {
 	 * Default special characters
 	 */
 	private static final String SPECIAL	= "!@#$%^&*_=+-/";
+	/**
+	 * Use upper case?
+	 */
+	private boolean useUpper;
+	/**
+	 * Use lower case?
+	 */
+	private boolean useLower;
+	/**
+	 * Use numbers?
+	 */
+	private boolean useDigit;
+	/**
+	 * Use special chars?
+	 */
+	private boolean useSpecial;
+
+	/**
+	 * Contructor()
+	 */
+	public Password() {
+
+		this.useUpper = true;
+		this.useLower = true;
+		this.useDigit = true;
+		this.useSpecial = true;
+
+	}
 
 	/**
 	 * generate()
@@ -40,8 +70,8 @@ public class Password extends com.corelib.CoreLib {
 	 *
 	 * @return String
 	 */
-	public static String generate() {
-		return Password.generate(8);
+	public String generate() {
+		return this.generate(8);
 	}
 
 	/**
@@ -51,44 +81,73 @@ public class Password extends com.corelib.CoreLib {
 	 * @param  int len Length of the string
 	 * @return String
 	 */
-	public static String generate(int len) {
+	public String generate(int len) {
 
 		int lenAlphaL = Password.ALPHA_L.length();
 		int lenAlphaU = Password.ALPHA_U.length();
 		int lenNum = Password.NUM.length();
 		int lenSpecial = Password.SPECIAL.length();
+		int rand;
 
-		char c = '\0';
-		Random charRand = new Random();
-		Random location = new Random();
-		List<String> pass = new ArrayList<String>();
 		StringBuilder out = new StringBuilder("");
 
-		for(int i = 0; i < len; i++) {
-			switch(charRand.nextInt(4)) {
-				case 0:
-					c = Password.ALPHA_L.charAt(location.nextInt(lenAlphaL));
-					break;
-				case 1:
-					c = Password.ALPHA_U.charAt(location.nextInt(lenAlphaU));
-					break;
-				case 2:
-					c = Password.NUM.charAt(location.nextInt(lenNum));
-					break;
-				case 3:
-				default:
-					c = Password.SPECIAL.charAt(location.nextInt(lenSpecial));
-					break;
-			}
-			pass.add(Character.toString(c));
+		if(this.useUpper) {
+			out.append(Password.ALPHA_U);
+			out = Utils.shuffle(out.toString());
 		}
-
-		Collections.shuffle(pass);
-
-		for (String o : pass) {
-			out.append(o);
+		if(this.useLower) {
+			out.append(Password.ALPHA_L);
+			out = Utils.shuffle(out.toString());
 		}
-		return out.toString();
+		if(this.useDigit) {
+			out.append(Password.NUM);
+			out = Utils.shuffle(out.toString());
+		}
+		if(this.useSpecial) {
+			out.append(Password.SPECIAL);
+			out = Utils.shuffle(out.toString());
+		}
+		return Utils.shuffle(out.toString()).toString().substring(0, len);
+	}
+
+	/**
+	 * setUseUpper()
+	 * Enable or disable the usage of upper case letters
+	 *
+	 * @param  Boolean useUpper
+	 */
+	public void setUseUpper(boolean useUpper) {
+		this.useUpper = useUpper;
+	}
+
+	/**
+	 * setUseLower()
+	 * Enable or disable the usage of lower case letters
+	 *
+	 * @param  Boolean useLower
+	 */
+	public void setUseLower(boolean useLower) {
+		this.useLower = useLower;
+	}
+
+	/**
+	 * setUseDigit()
+	 * Enable or disable the usage of numbers
+	 *
+	 * @param  Boolean useDigit
+	 */
+	public void setUseDigit(boolean useDigit) {
+		this.useDigit = useDigit;
+	}
+
+	/**
+	 * setUseSpecial()
+	 * Enable or disable the usage of special characters
+	 *
+	 * @param  Boolean useSpecial
+	 */
+	public void setUseSpecial(boolean useSpecial) {
+		this.useSpecial = useSpecial;
 	}
 
 	/**

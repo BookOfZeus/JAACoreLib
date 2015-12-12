@@ -5,6 +5,78 @@ public class PasswordTest extends CoreLibTest {
 
 	// Start test
 
+	private int test_gen() {
+		int valid = 0;
+		double score = 0;
+		String pass = "";
+
+		// Lower
+		Password pLower = new Password();
+		pLower.setUseUpper(false);
+		pLower.setUseDigit(false);
+		pLower.setUseSpecial(false);
+
+		pass = pLower.generate(4);
+		//System.out.println(pass);
+		score = Password.getScore(pass);
+		valid += this.assertTrue("test_run failed: Lower score should be : "+score, score == 9);
+
+		// Upper
+		Password pUpper = new Password();
+		pUpper.setUseLower(false);
+		pUpper.setUseDigit(false);
+		pUpper.setUseSpecial(false);
+
+		pass = pUpper.generate(4);
+		//System.out.println(pass);
+		score = Password.getScore(pass);
+		valid += this.assertTrue("test_run failed: Upper score should be : "+score, score == 9);
+
+		// Digit
+		Password pDigit = new Password();
+		pDigit.setUseLower(false);
+		pDigit.setUseUpper(false);
+		pDigit.setUseSpecial(false);
+
+		pass = pDigit.generate(4);
+		//System.out.println(pass);
+		score = Password.getScore(pass);
+		valid += this.assertTrue("test_run failed: Digit score should be : "+score, score == 9);
+
+		// Special
+		Password pSpec = new Password();
+		pSpec.setUseLower(false);
+		pSpec.setUseUpper(false);
+		pSpec.setUseSpecial(false);
+
+		pass = pSpec.generate(4);
+		//System.out.println(pass);
+		score = Password.getScore(pass);
+		valid += this.assertTrue("test_run failed: Special score should be : "+score, score == 9);
+
+		// digit + Special
+		Password pDS = new Password();
+		pDS.setUseLower(false);
+		pDS.setUseUpper(false);
+
+		pass = pDS.generate(4);
+		//System.out.println(pass);
+		score = Password.getScore(pass);
+		valid += this.assertTrue("test_run failed: digit + Special 4 score should be : "+score, score == 50);
+
+		// digit + Special
+		Password pDS2 = new Password();
+		pDS2.setUseLower(false);
+		pDS2.setUseUpper(false);
+
+		pass = pDS2.generate(8);
+		//System.out.println(pass);
+		score = Password.getScore(pass);
+		valid += this.assertTrue("test_run failed: digit + Special 8 score should be : "+score, score == 54);
+
+		return valid;
+	}
+	
 	private int test_run1() {
 		int valid = 0;
 		double score = 0;
@@ -79,6 +151,9 @@ public class PasswordTest extends CoreLibTest {
 	public void runTests() {
 		int valid = 0;
 		PasswordTest test = new PasswordTest();
+
+		// generate
+		valid += test.test_gen();
 
 		// test_1
 		valid += test.test_run1();

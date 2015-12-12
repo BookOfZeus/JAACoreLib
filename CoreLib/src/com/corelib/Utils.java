@@ -2,6 +2,8 @@ package com.corelib;
 
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Utils.java
@@ -78,5 +80,24 @@ public class Utils {
 		catch(Exception ex) {
 			//
 		}
+	}
+
+	/**
+	 * Shuffle a string
+	 *
+	 * @param String input Input stream
+	 * @return StringBuilder
+	 */
+	public static StringBuilder shuffle(String input){
+		List<Character> characters = new ArrayList<Character>();
+		for(char c:input.toCharArray()){
+			characters.add(c);
+		}
+		StringBuilder output = new StringBuilder(input.length());
+		while(characters.size()!=0){
+			int randPicker = (int)(Math.random()*characters.size());
+			output.append(characters.remove(randPicker));
+		}
+		return output;
 	}
 }

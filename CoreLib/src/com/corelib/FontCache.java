@@ -1,3 +1,5 @@
+package com.corelib;
+
 import android.content.Context;
 import android.graphics.Typeface;
 import java.util.Hashtable;
