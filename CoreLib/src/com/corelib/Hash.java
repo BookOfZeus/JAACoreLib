@@ -1,3 +1,5 @@
+package com.corelib;
+
 import java.security.MessageDigest;
 import java.util.Random;
 
