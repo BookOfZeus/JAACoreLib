@@ -30,11 +30,11 @@ public class Password extends com.corelib.CoreLib {
 	/**
 	 * Default numeric values
 	 */
-	private static final String NUM 	= "0123456789";
+	private static final String NUM 	= "01234567890123456789";
 	/**
 	 * Default special characters
 	 */
-	private static final String SPECIAL	= "!@#$%^&*_=+-/|";
+	private static final String SPECIAL	= "!@#$%^&*_=+-/|!@#$%^&*_=+-/|";
 	/**
 	 * Use upper case?
 	 */
