@@ -28,9 +28,9 @@ public class DeviceDimension {
 		DisplayMetrics metrics = new DisplayMetrics();
 		activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
 		int width = metrics.widthPixels;
-		return width < 550 && orientation == Configuration.ORIENTATION_PORTRAIT
+		return width < DeviceDimension.MAX_PORTRAIT_WIDTH && orientation == Configuration.ORIENTATION_PORTRAIT
 			? true
-			: width < 850 && orientation == Configuration.ORIENTATION_LANDSCAPE;
+			: width < DeviceDimension.MAX_LANDSCAPE_WIDTH && orientation == Configuration.ORIENTATION_LANDSCAPE;
 	}
 }
 
