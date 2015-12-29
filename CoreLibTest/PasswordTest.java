@@ -162,6 +162,26 @@ public class PasswordTest extends CoreLibTest {
 		return valid;
 	}
 
+	private int test_run4() {
+		int valid = 0;
+		double score = 0;
+
+		score = Password.getScore("verygood");
+		valid += this.assertTrue("test_run failed: score should be : "+score, score == 29);
+
+		score = Password.getScore("verygoodall");
+		valid += this.assertTrue("test_run failed: score should be : "+score, score == 41);
+
+		score = Password.getScore("BACADJAGGJG");
+		valid += this.assertTrue("test_run failed: score should be : "+score, score == 41);
+
+		score = Password.getScore("ZYUSMBJSSKJAJGWQ");
+		valid += this.assertTrue("test_run failed: score should be : "+score, score == 61);
+
+		return valid;
+	}
+
+
 	// Run test	
 
 	public void runTests() {
@@ -182,6 +202,9 @@ public class PasswordTest extends CoreLibTest {
 
 		// test_3
 		valid += test.test_run3();
+
+		// test_4
+		valid += test.test_run4();
 
 		// Show the test results
 		test.showResult(valid);

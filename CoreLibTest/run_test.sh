@@ -1,6 +1,6 @@
 #!/bin/bash
 
-clear ;
+reset ;
 
 if [ -z $1 ]; then
 	echo "For what class?"
