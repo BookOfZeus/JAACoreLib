@@ -10,6 +10,8 @@ import java.io.File;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -272,6 +274,37 @@ public class FileCache extends com.corelib.CoreLib {
 			}
 		}
 		catch (IOException e) {
+			throw e;
+		}
+		return ret;
+	}
+
+	/**
+	 * Copy a source file to a destination file
+	 *
+	 * @param	src The source file
+	 * @param	dst	The destination file
+	 * @return Success or failure
+	 */
+	public static boolean copy(String src, String dst) throws IOException {
+		boolean ret = false;
+
+		try {
+
+			InputStream in = new FileInputStream(new File(src));
+			OutputStream out = new FileOutputStream(new File(dst));
+
+			// Transfer bytes from in to out
+			byte[] buf = new byte[1024];
+			int len;
+			while ((len = in.read(buf)) > 0) {
+				out.write(buf, 0, len);
+			}
+			in.close();
+			out.close();
+			ret = true;
+		}
+		catch(IOException e) {
 			throw e;
 		}
 		return ret;

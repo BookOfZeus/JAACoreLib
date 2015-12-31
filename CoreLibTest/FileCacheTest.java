@@ -126,6 +126,25 @@ public class FileCacheTest extends CoreLibTest {
 		return valid;
 	}
 
+	private int test_copy() {
+
+		int valid = 0;
+
+		/* Here you will have to specify your own files */
+		String src = "/etc/hosts";
+		String dst = "/tmp/hosts";
+
+		try {
+			boolean copy = FileCache.copy(src, dst);
+			valid += this.assertTrue("test_copy failed: the copy should work", copy == true);
+		}
+		catch(IOException e) {
+			valid += this.assertTrue("test_copy failed: EXCEPTION: '" +  e.getMessage() + "'", true);
+		}
+
+		return valid;
+	}
+
 	// Run test	
 
 	public void runTests() {
@@ -149,6 +168,9 @@ public class FileCacheTest extends CoreLibTest {
 
 		// test_fileIsOld
 		valid += test.test_fileIsOld();
+
+		// test_copy
+		valid += test.test_copy();
 
 		// Show the test results
 		test.showResult(valid);
