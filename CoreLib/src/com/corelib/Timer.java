@@ -25,9 +25,9 @@ public class Timer {
 	 * @param int Seconds
 	 * @return Formated time (hh:mm:ss)
 	 */
-	public static String convertSecondsToMinutes(int sec) {
-		int seconds = sec % Timer.SECONDS_IN_MINUTE;
-		int minutes = (sec / Timer.SECONDS_IN_MINUTE) % Timer.MINUTES_IN_HOUR;
+	public static String convertSecondsToMinutes(long sec) {
+		long seconds = sec % Timer.SECONDS_IN_MINUTE;
+		long minutes = (sec / Timer.SECONDS_IN_MINUTE) % Timer.MINUTES_IN_HOUR;
 
 		return String.format("%02d", minutes) +
 			Timer.SEPARATOR + 
