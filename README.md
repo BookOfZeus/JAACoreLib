@@ -9,7 +9,7 @@
 
 To build/compile
 
-	ant release|debug
+	mvn clean compile assembly:single
 
 To clean:
 
