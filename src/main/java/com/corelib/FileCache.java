@@ -167,7 +167,7 @@ public class FileCache {
 	 * Create new file
 	 *
 	 * @return Success of failure
-	 * @throws java.io.IOException
+	 * @throws java.io.IOException File error
 	 */
 	public boolean createFile() throws IOException {
 		boolean created;
@@ -186,6 +186,8 @@ public class FileCache {
 	/**
 	 * Check if the file is old
 	 *
+	 * @param type The type
+	 * @param length The length
 	 * @return Success or failure
 	 */
 	public boolean isOld(int type, int length) {
@@ -279,12 +281,12 @@ public class FileCache {
 	 * @param src The source file
 	 * @param dst The destination file
 	 * @return Success or failure
+	 * @throws IOException File Error
 	 */
 	public static boolean copy(String src, String dst) throws IOException {
 		boolean ret;
 
 		try {
-
 			InputStream in = new FileInputStream(new File(src));
 			OutputStream out = new FileOutputStream(new File(dst));
 

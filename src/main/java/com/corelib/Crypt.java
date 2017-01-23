@@ -43,6 +43,7 @@ public class Crypt {
 	 *
 	 * @param text The string to encrypt
 	 * @return Byte[]
+	 * @throws Exception Encryption Exception
 	 */
 	public String encrypt(String text) throws Exception {
 		IvParameterSpec iv = new IvParameterSpec(initVector.getBytes("UTF-8"));
@@ -59,6 +60,7 @@ public class Crypt {
 	 *
 	 * @param encrypted Encrypted string
 	 * @return String
+	 * @throws Exception Decryption Exception
 	 */
 	public String decrypt(String encrypted) throws Exception {
 		IvParameterSpec iv = new IvParameterSpec(initVector.getBytes("UTF-8"));
