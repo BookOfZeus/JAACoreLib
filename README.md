@@ -2,13 +2,8 @@
 
 ## Requirements
 
-ant
-
-## SDK
-
-you will need to change the location of your Android SDK (sdk.dir) in:
-
-	CoreLib/local.properties
+- maven 3.x
+- JDK 1.8
 
 ## Build
 
@@ -18,22 +13,18 @@ To build/compile
 
 To clean:
 
-	ant clean
+	maven clean
 
-### Test
+## Documentation
 
-To test, you need to create a sample file, compile it using the library and run it.
+###Java Doc
 
-	javac -cp .:/path/to/MyLibrary.jar /path/to/LibraryDemoTest.java
-	java -cp .:/path/to/MyLibrary.jar /path/to/LibraryDemoTest
+    maven javadoc:javadoc
 
-eg:
+###Site
 
-	rm *.class
-	javac -classpath .:./CoreLib.jar:./Jar/* *.java 
-	java -classpath .:./CoreLib.jar FileCacheTest
+    maven site
 
-Or if you need to include specific jars:
+## Test
 
-	java -classpath .:./CoreLib.jar:./Jar/* DownloaderServiceTest.java
-
+    maven test
