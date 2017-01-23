@@ -27,7 +27,7 @@ import java.util.Date;
  * @author	Eric Potvin
  * @version 1.0
  */
-public class FileCache {
+class FileCache {
 	/**
 	 * The class tag name
 	 */
@@ -51,7 +51,8 @@ public class FileCache {
 	 *
 	 * @param file The filename
 	 */
-	public FileCache(String file) {
+	public FileCache(String file)
+	{
 		this.filename = file;
 		this.file = new File(filename);
 	}
@@ -62,7 +63,8 @@ public class FileCache {
 	 * @param path The full path
 	 * @param file The filename
 	 */
-	public FileCache(String path, String file) {
+	public FileCache(String path, String file)
+	{
 		this(path + File.separator + file);
 		this.filename = path + File.separator + file;
 	}
@@ -71,9 +73,10 @@ public class FileCache {
 	 * Constructor
 	 *
 	 * @param path The external storage mounted path
+	 * @throws IOException Write Error
 	 */
-	public FileCache(File path) {
-		//Find the dir to save cached images
+	public FileCache(File path) throws IOException
+	{
 		if (android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED)) {
 			cacheDir = new File(android.os.Environment.getExternalStorageDirectory(), FileCache.IMAGE_CACHE_PATH);
 		}
@@ -81,7 +84,9 @@ public class FileCache {
 			cacheDir = path;
 		}
 		if(!cacheDir.exists()) {
-			cacheDir.mkdirs();
+			if (!cacheDir.mkdirs()) {
+				throw new IOException("Unable to create directory");
+			}
 		}
 	}
 
@@ -91,7 +96,8 @@ public class FileCache {
 	 * @param url The URL to fetch
 	 * @return File Object
 	 */
-	public File getFile(String url){
+	public File getFile(String url)
+	{
 		this.filename = String.valueOf(url.hashCode());
 		return new File(this.cacheDir, this.filename);
 	}
@@ -100,30 +106,20 @@ public class FileCache {
 	 * Save a file
 	 *
 	 * @param content The content of the file
-	 * @return Success or failure
 	 * @throws java.io.IOException File not found
 	 */
-	public boolean save(String content) throws IOException {
-
-		boolean saved;
-
+	public void save(String content) throws IOException
+	{
 		if (!this.fileExists()) {
 			if(!this.createFile()) {
 				throw new IOException(FileCache.TAG + ":" + FileCache.ERROR_CREATE_FILE);
 			}
 		}
-		try {
-			BufferedWriter bw = new BufferedWriter(
-					new FileWriter(this.filename)
-					);
-			bw.write(content);
-			bw.close();
-			saved = true;
-		}
-		catch (IOException e) {
-			throw e;
-		}
-		return saved;
+		BufferedWriter bw = new BufferedWriter(
+			new FileWriter(this.filename)
+		);
+		bw.write(content);
+		bw.close();
 	}
 
 	/**
@@ -132,26 +128,22 @@ public class FileCache {
 	 * @return The content of the file (can be empty if the file does not exists)
 	 * @throws java.io.IOException File Error
 	 */
-	public String read() throws IOException {
+	public String read() throws IOException
+	{
 		if(!this.fileExists()) {
 			throw new FileNotFoundException("File Not Found");
 		}
-		try {
-			String read;
-			StringBuilder builder = new StringBuilder("");
+		String read;
+		StringBuilder builder = new StringBuilder("");
 
-			BufferedReader br = new BufferedReader(
-					new FileReader(this.filename)
-					);
-			while((read = br.readLine()) != null) {
-				builder.append(read);
-			}
-			br.close();
-			return builder.toString();
+		BufferedReader br = new BufferedReader(
+			new FileReader(this.filename)
+		);
+		while((read = br.readLine()) != null) {
+			builder.append(read);
 		}
-		catch (IOException e) {
-			throw e;
-		}
+		br.close();
+		return builder.toString();
 	}
 
 	/**
@@ -159,7 +151,8 @@ public class FileCache {
 	 *
 	 * @return Success of failure
 	 */
-	public boolean fileExists() {
+	public boolean fileExists()
+	{
 		return this.file.exists() && this.file.canRead();
 	}
 
@@ -170,17 +163,7 @@ public class FileCache {
 	 * @throws java.io.IOException File error
 	 */
 	public boolean createFile() throws IOException {
-		boolean created;
-		if(this.file.exists()) {
-			return false;
-		}
-		try {
-			created = this.file.createNewFile();
-		}
-		catch (IOException e) {
-			throw e;
-		}
-		return created;
+		return !this.file.exists() && this.file.createNewFile();
 	}
 
 	/**
@@ -190,7 +173,8 @@ public class FileCache {
 	 * @param length The length
 	 * @return Success or failure
 	 */
-	public boolean isOld(int type, int length) {
+	public boolean isOld(int type, int length)
+	{
 		if(!this.fileExists()) {
 			return true;
 		}
@@ -207,25 +191,24 @@ public class FileCache {
 	 * @return Success or failure
 	 */
 	public boolean remove() {
-		if(!this.fileExists()) {
-			return true;
-		}
-		if(!this.file.canWrite()) {
-			return false;
-		}
-		return this.file.delete();
+		return !this.fileExists() || this.file.canWrite() && this.file.delete();
 	}
 
 	/**
 	 * Clear the cache folder
+	 *
+	 * @throws IOException Write Error
 	 */
-	public void clear(){
+	public void clear() throws IOException
+	{
 		File[] files = cacheDir.listFiles();
 		if(files == null) {
 			return;
 		}
 		for(File f:files) {
-			f.delete();
+			if (!f.delete()) {
+				throw new IOException("Unable to delete file");
+			}
 		}
 	}
 
@@ -237,40 +220,31 @@ public class FileCache {
 	 * @return Success or failure
 	 * @throws IOException File Error
 	 */
-	public static boolean copyAssets(String folder, Context c) throws IOException {
+	public static boolean copyAssets(String folder, Context c) throws IOException
+	{
 		boolean ret = false;
 
 		AssetManager assetManager = c.getAssets();
 		String[] files;
 
-		try {
-			files = assetManager.list(folder);
-			for(String f: files) {
+		files = assetManager.list(folder);
+		for(String f: files) {
 
-				InputStream in;
-				OutputStream out;
-				try {
-					in = assetManager.open(folder + File.separator + f);
-					File outFile = new File(c.getFilesDir().toString() + File.separator, f);
-					out = new FileOutputStream(outFile);
+			InputStream in;
+			OutputStream out;
+			in = assetManager.open(folder + File.separator + f);
+			File outFile = new File(c.getFilesDir().toString() + File.separator, f);
+			out = new FileOutputStream(outFile);
 
-					// Copy
-					byte[] buffer = new byte[1024];
-					int read;
-					while((read = in.read(buffer)) != -1){
-						out.write(buffer, 0, read);
-					}
-					in.close();
-					out.close();
-					ret = true;
-				}
-				catch(IOException e) {
-					throw e;
-				}
+			// Copy
+			byte[] buffer = new byte[1024];
+			int read;
+			while((read = in.read(buffer)) != -1){
+				out.write(buffer, 0, read);
 			}
-		}
-		catch (IOException e) {
-			throw e;
+			in.close();
+			out.close();
+			ret = true;
 		}
 		return ret;
 	}
@@ -280,29 +254,20 @@ public class FileCache {
 	 *
 	 * @param src The source file
 	 * @param dst The destination file
-	 * @return Success or failure
 	 * @throws IOException File Error
 	 */
-	public static boolean copy(String src, String dst) throws IOException {
-		boolean ret;
+	public static void copy(String src, String dst) throws IOException
+	{
+		InputStream in = new FileInputStream(new File(src));
+		OutputStream out = new FileOutputStream(new File(dst));
 
-		try {
-			InputStream in = new FileInputStream(new File(src));
-			OutputStream out = new FileOutputStream(new File(dst));
-
-			// Transfer bytes from in to out
-			byte[] buf = new byte[1024];
-			int len;
-			while ((len = in.read(buf)) > 0) {
-				out.write(buf, 0, len);
-			}
-			in.close();
-			out.close();
-			ret = true;
+		// Transfer bytes from in to out
+		byte[] buf = new byte[1024];
+		int len;
+		while ((len = in.read(buf)) > 0) {
+			out.write(buf, 0, len);
 		}
-		catch(IOException e) {
-			throw e;
-		}
-		return ret;
+		in.close();
+		out.close();
 	}
 }

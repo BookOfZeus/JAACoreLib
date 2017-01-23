@@ -2,6 +2,7 @@ package com.corelib;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
+
 import org.junit.Test;
 
 import java.io.IOException;
@@ -15,9 +16,9 @@ public class FileCacheTest {
 	/**
 	 * Sample test files/content
 	 */
-	private static String FOLDER_TEST = "/tmp/";
-	private static String FILENAME_TEST = "test_random_file.txt";
-	private static String BAD_FOLDER	= "/bad_folder";
+	private static final String FOLDER_TEST = "/tmp/";
+	private static final String FILENAME_TEST = "test_random_file.txt";
+	private static final String BAD_FOLDER	= "/bad_folder";
 	private static String FILE_CONTENT	= "Java UnitTest Content";
 
 	@Test
@@ -28,7 +29,6 @@ public class FileCacheTest {
 		// File does not exists
 		assertTrue(!fc.fileExists());
 		assertFalse(fc.fileExists());
-
 	}
 
 	@Test
@@ -44,7 +44,7 @@ public class FileCacheTest {
 			fc.createFile();
 		}
 		catch (IOException ex) {
-			// Catched!
+			// Exception thrown
 		}
 	}
 
@@ -63,9 +63,16 @@ public class FileCacheTest {
 	@Test
 	public void testFileCacheFileSave() throws Exception
 	{
-		FileCache fc = new FileCache(FileCacheTest.FOLDER_TEST + FileCacheTest.FILENAME_TEST);
-		assertTrue(fc.save(FileCacheTest.FILE_CONTENT));
-		fc.remove();
+		boolean exceptionThrown = false;
+		try {
+			FileCache fc = new FileCache(FileCacheTest.FOLDER_TEST + FileCacheTest.FILENAME_TEST);
+			fc.save(FileCacheTest.FILE_CONTENT);
+			fc.remove();
+		}
+		catch (IOException ex) {
+			exceptionThrown = true;
+		}
+		assertTrue(!exceptionThrown);
 	}
 
 	@Test
@@ -104,6 +111,13 @@ public class FileCacheTest {
 		String src = "/etc/hosts";
 		String dst = "/tmp/hosts";
 
-		assertTrue(FileCache.copy(src, dst));
+		boolean exceptionThrown = false;
+		try {
+			FileCache.copy(src, dst);
+		}
+		catch (IOException ex) {
+			exceptionThrown = true;
+		}
+		assertTrue(!exceptionThrown);
 	}
 }

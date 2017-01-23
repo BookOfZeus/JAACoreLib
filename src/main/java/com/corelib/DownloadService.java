@@ -7,7 +7,6 @@ import android.os.StrictMode;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
-import org.apache.http.NameValuePair;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.BasicHttpParams;
@@ -17,9 +16,6 @@ import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
 import java.lang.String;
-import java.net.MalformedURLException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * DownloadService.java
@@ -29,7 +25,7 @@ import java.util.List;
  * @author	Eric Potvin
  * @version 1.0
  */
-public class DownloadService extends IntentService {
+class DownloadService extends IntentService {
 	/**
 	 * The class tag name
 	 */
@@ -64,13 +60,19 @@ public class DownloadService extends IntentService {
 	private String response;
 	private int httpCode;
 	private long length;
+	private String cacheFile;
 
 	/**
 	 * Constructor
 	 *
 	 */
-	public DownloadService() {
+	public DownloadService()
+	{
 		super("DownloadService");
+		this.response = "";
+		this.httpCode = 0;
+		this.length = 0;
+		this.cacheFile = "";
 	}
 
 	/**
@@ -79,21 +81,15 @@ public class DownloadService extends IntentService {
 	 * @param intent The intent
 	 */
 	@Override
-	protected void onHandleIntent(Intent intent) {
-
-		// Setup the variables that we will use from the intent
-		String url = null;
-		//com.corelib.URLHandler urlHandler = null;
+	protected void onHandleIntent(Intent intent)
+	{
+		String url;
 		//int method = DownloadService.GET;
-		long length = 0;
-		String response = "";
-		String cacheFile = "";
 
 		try {
-
 			// Get the intent passed params
 			url = intent.getStringExtra(DownloadService.URL);
-			cacheFile = intent.getStringExtra(DownloadService.CACHE_FILE);
+			this.cacheFile = intent.getStringExtra(DownloadService.CACHE_FILE);
 
 			// Make sure Strict mode is enabled
 			if (android.os.Build.VERSION.SDK_INT > 8) {
@@ -111,60 +107,36 @@ public class DownloadService extends IntentService {
 			HttpEntity httpEntity;
 			HttpResponse httpResponse;
 
-			// Checking http request method type
-			/*
-			if (method == com.corelib.DownloadService.POST) {
-				HttpPost httpCall = new HttpPost(url);
-				if (params != null || !params.isEmpty()) {
-					httpCall.setEntity(new UrlEncodedFormEntity(params));
-				}
-				httpResponse = httpClient.execute(httpCall);
-			}
-			else {
-				if (params != null || !params.isEmpty()) {
-					String paramString = URLEncodedUtils.format(params, "utf-8");
-					url += "?" + paramString;
-				}
-				HttpGet httpCall = new HttpGet(url);
-				httpResponse = httpClient.execute(httpCall);
-			}
-			*/
 			HttpGet httpCall = new HttpGet(url);
 			httpResponse = httpClient.execute(httpCall);
 
-			httpCode = httpResponse.getStatusLine().getStatusCode();
-			if(httpCode != HttpStatus.SC_OK) {
+			this.httpCode = httpResponse.getStatusLine().getStatusCode();
+			if(this.httpCode != HttpStatus.SC_OK) {
 				return;
 			}
 
 			httpEntity = httpResponse.getEntity();
 			length = httpEntity.getContentLength();
-			response = EntityUtils.toString(httpEntity);
-		}
-		catch (MalformedURLException e) {
-			e.printStackTrace();
+			this.response = EntityUtils.toString(httpEntity);
 		}
 		catch (IOException e) {
 			e.printStackTrace();
 		}
 
-		this.publishResults(response, httpCode, length, cacheFile);
+		this.publishResults();
 	}
 
 	/**
 	 * publishResults
 	 *
-	 * @param response The response
-	 * @param httpCode The HTTP Code received
-	 * @param length The length of the request/response
-	 * @param cacheFile The cached file
 	 */
-	private void publishResults(String response, int httpCode, long length, String cacheFile) {
+	private void publishResults()
+	{
 		Intent intent = new Intent(DownloadService.INTENT);
-		intent.putExtra(DownloadService.RESPONSE, response);
-		intent.putExtra(DownloadService.HTTP_CODE, httpCode);
-		intent.putExtra(DownloadService.LENGTH, length);
-		intent.putExtra(DownloadService.CACHE_FILE, cacheFile);
+		intent.putExtra(DownloadService.RESPONSE, this.response);
+		intent.putExtra(DownloadService.HTTP_CODE, this.httpCode);
+		intent.putExtra(DownloadService.LENGTH, this.length);
+		intent.putExtra(DownloadService.CACHE_FILE, this.cacheFile);
 		sendBroadcast(intent);
 	}
 }

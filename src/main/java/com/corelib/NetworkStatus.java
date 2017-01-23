@@ -12,7 +12,7 @@ import android.net.NetworkInfo;
  * @author	Eric Potvin
  * @version 1.0
  */
-public class NetworkStatus {
+class NetworkStatus {
 
 	private Context context;
 
@@ -21,7 +21,8 @@ public class NetworkStatus {
 	 *
 	 * @param context The context
 	 */
-	public NetworkStatus(Context context){
+	public NetworkStatus(Context context)
+	{
 		this.context = context;
 	}
 
@@ -30,7 +31,8 @@ public class NetworkStatus {
 	 *
 	 * @return Success or failure
 	 */
-	public boolean canConnectToInternet() {
+	public boolean canConnectToInternet()
+	{
 		ConnectivityManager cm = (ConnectivityManager) this.context.getSystemService(Context.CONNECTIVITY_SERVICE);
 		if(cm == null) {
 			return false;
@@ -39,8 +41,8 @@ public class NetworkStatus {
 		if(activeNetworkInfo == null) {
 			return false;
 		}
-		for(int i = 0; i < activeNetworkInfo.length; i++) {
-			if(activeNetworkInfo[i].getState() == NetworkInfo.State.CONNECTED) {
+		for (NetworkInfo anActiveNetworkInfo : activeNetworkInfo) {
+			if (anActiveNetworkInfo.getState() == NetworkInfo.State.CONNECTED) {
 				return true;
 			}
 		}

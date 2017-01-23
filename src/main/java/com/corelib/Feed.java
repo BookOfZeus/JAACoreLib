@@ -15,7 +15,7 @@ import java.util.Calendar;
  * @author	Eric Potvin
  * @version 1.0
  */
-public class Feed {
+class Feed {
 	/**
 	 * The class tag name
 	 */
@@ -118,8 +118,9 @@ public class Feed {
 	 * @param mode The mode (RSS or Sitemap)
 	 * @param filename The filename of the feed
 	 */
-	public Feed(int mode, String filename) {
-		this.feeds = new ArrayList<com.corelib.FeedItem>();
+	public Feed(int mode, String filename)
+	{
+		this.feeds = new ArrayList<>();
 		this.file = filename;
 		this.mode = mode;
 
@@ -133,7 +134,8 @@ public class Feed {
 	 *
 	 * @param timeMode The time mode
 	 */
-	public void setTimeMode(int timeMode) {
+	public void setTimeMode(int timeMode)
+	{
 		this.timeMode = timeMode;
 	}
 
@@ -142,7 +144,8 @@ public class Feed {
 	 *
 	 * @param timeFrame The amount of time
 	 */
-	public void setTimeFrame(int timeFrame) {
+	public void setTimeFrame(int timeFrame)
+	{
 		this.timeFrame = timeFrame;
 	}
 
@@ -151,7 +154,8 @@ public class Feed {
 	 *
 	 * @throws java.lang.Exception XML Exception
 	 */
-	public void processFeed() throws Exception {
+	public void processFeed() throws Exception
+	{
 
 		this.resetFeed();
 
@@ -163,66 +167,61 @@ public class Feed {
 		// Load the xml data
 		//
 
-		try {
-			// Get new data
-			com.corelib.XMLParser xmlParser = new com.corelib.XMLParser();
-			String data = xmlParser.getXml(this.file);
+		// Get new data
+		XMLParser xmlParser = new XMLParser();
+		String data = xmlParser.getXml(this.file);
 
-			// Validate feed
-			if(data.equals("")) {
-				throw new Exception(Feed.TAG + ":" + Feed.ERROR_EMPTY_FEED);
-			}
-
-			// Parse feed
-			Document doc = xmlParser.getDomElement(data);
-
-			if(doc == null) {
-				throw new Exception(Feed.TAG + ":" + Feed.ERROR_INVALID_DOM);
-			}
-
-			// Loop through the nodes
-			String parent = Feed.KEY_RSS_PARENT;
-			if(this.mode == Feed.SITEMAP) {
-				parent = Feed.KEY_SITEMAP_PARENT;
-			}
-
-			NodeList nl = doc.getElementsByTagName(parent);
-			int len = nl.getLength();
-			if(len <= 0) {
-				return;
-			}
-
-			for (int i = 0; i < len; i++) {
-				Element e = (Element) nl.item(i);
-				com.corelib.FeedItem fi = new com.corelib.FeedItem();
-				if(this.mode == Feed.SITEMAP) {
-					String loc = xmlParser.getValue(e, KEY_SITEMAP_LOC);
-					if(loc.equals("")) {
-						continue;
-					}
-					fi.setTitle(com.corelib.URLHandler.getNameFromUrl(loc));
-					fi.setLink(loc);
-					fi.setDate(xmlParser.getValue(e, KEY_SITEMAP_LAST_MOD));
-				}
-				else {
-					String title = xmlParser.getValue(e, KEY_RSS_TITLE);
-					if(title.equals("")) {
-						continue;
-					}
-					fi.setTitle(title);
-					fi.setDescription(xmlParser.getValue(e, KEY_RSS_DESC));
-					fi.setLink(xmlParser.getValue(e, KEY_RSS_LINK));
-					fi.setGuid(xmlParser.getValue(e, KEY_RSS_GUID));
-					fi.setSource(xmlParser.getValue(e, KEY_RSS_SOURCE));
-					fi.setCategory(xmlParser.getValue(e, KEY_RSS_CATEGORY));
-					fi.setDate(xmlParser.getValue(e, KEY_RSS_DATE));
-					fi.setImage(xmlParser.getValue(e, KEY_RSS_IMAGE));
-				}
-				this.feeds.add(fi);
-			}
+		// Validate feed
+		if(data.equals("")) {
+			throw new Exception(Feed.TAG + ":" + Feed.ERROR_EMPTY_FEED);
 		}
-		catch (Exception e) {
-			throw e;
+
+		// Parse feed
+		Document doc = xmlParser.getDomElement(data);
+
+		if(doc == null) {
+			throw new Exception(Feed.TAG + ":" + Feed.ERROR_INVALID_DOM);
+		}
+
+		// Loop through the nodes
+		String parent = Feed.KEY_RSS_PARENT;
+		if(this.mode == Feed.SITEMAP) {
+			parent = Feed.KEY_SITEMAP_PARENT;
+		}
+
+		NodeList nl = doc.getElementsByTagName(parent);
+		int len = nl.getLength();
+		if(len <= 0) {
+			return;
+		}
+
+		for (int i = 0; i < len; i++) {
+			Element e = (Element) nl.item(i);
+			FeedItem fi = new FeedItem();
+			if(this.mode == Feed.SITEMAP) {
+				String loc = xmlParser.getValue(e, KEY_SITEMAP_LOC);
+				if(loc.equals("")) {
+					continue;
+				}
+				fi.setTitle(URLHandler.getNameFromUrl(loc));
+				fi.setLink(loc);
+				fi.setDate(xmlParser.getValue(e, KEY_SITEMAP_LAST_MOD));
+			}
+			else {
+				String title = xmlParser.getValue(e, KEY_RSS_TITLE);
+				if(title.equals("")) {
+					continue;
+				}
+				fi.setTitle(title);
+				fi.setDescription(xmlParser.getValue(e, KEY_RSS_DESC));
+				fi.setLink(xmlParser.getValue(e, KEY_RSS_LINK));
+				fi.setGuid(xmlParser.getValue(e, KEY_RSS_GUID));
+				fi.setSource(xmlParser.getValue(e, KEY_RSS_SOURCE));
+				fi.setCategory(xmlParser.getValue(e, KEY_RSS_CATEGORY));
+				fi.setDate(xmlParser.getValue(e, KEY_RSS_DATE));
+				fi.setImage(xmlParser.getValue(e, KEY_RSS_IMAGE));
+			}
+			this.feeds.add(fi);
 		}
 	}
 
@@ -231,7 +230,8 @@ public class Feed {
 	 *
 	  * @return The list of feeds
 	 */
-	public ArrayList<com.corelib.FeedItem> getFeeds() {
+	public ArrayList<com.corelib.FeedItem> getFeeds()
+	{
 		return this.feeds;
 	}
 
@@ -239,7 +239,8 @@ public class Feed {
 	 * Empty the feed list
 	 *
 	 */
-	private void resetFeed() {
-		this.feeds = new ArrayList<com.corelib.FeedItem>();
+	private void resetFeed()
+	{
+		this.feeds = new ArrayList<>();
 	}
 }

@@ -17,7 +17,7 @@ import java.util.List;
  * @author	Eric Potvin
  * @version 1.0
  */
-public class FeedDB extends SQLiteOpenHelper {
+class FeedDB extends SQLiteOpenHelper {
 	/**
 	 * The class tag name
 	 */
@@ -72,7 +72,8 @@ public class FeedDB extends SQLiteOpenHelper {
 	 *
 	 * @param context The context
 	 */
-	public FeedDB(Context context) {
+	public FeedDB(Context context)
+	{
 		super(context, FeedDB.DATABASE_NAME, null, FeedDB.DATABASE_VERSION);
 	}
 
@@ -82,7 +83,8 @@ public class FeedDB extends SQLiteOpenHelper {
 	 * @param db The SQLite database
 	 */
 	@Override
-	public void onCreate(SQLiteDatabase db) {
+	public void onCreate(SQLiteDatabase db)
+	{
 		String createTable =
 				"CREATE TABLE IF NOT EXISTS " + FeedDB.DATABASE_NAME + "." + FeedDB.TABLE_NAME + "("
 				+ FeedDB.FIELD_ID + " INTEGER PRIMARY KEY,"
@@ -102,7 +104,8 @@ public class FeedDB extends SQLiteOpenHelper {
 	 * @param db The SQLite database
 	 */
 	@Override
-	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
+	{
 		// Drop older table if existed
 		db.execSQL("DROP TABLE IF EXISTS " + FeedDB.TABLE_NAME);
 
@@ -115,7 +118,8 @@ public class FeedDB extends SQLiteOpenHelper {
 	 *
 	 * @param feed A FeedItem Object
 	 */
-	public void addFeed(com.corelib.FeedItem feed) {
+	public void addFeed(com.corelib.FeedItem feed)
+	{
 		SQLiteDatabase db = this.getWritableDatabase();
 
 		ContentValues contentValues = this.populate(feed);
@@ -131,7 +135,8 @@ public class FeedDB extends SQLiteOpenHelper {
 	 * @param id The FeedItem id
 	 * @return A FeedItem object
 	 */
-	public com.corelib.FeedItem getFeed(int id) {
+	public com.corelib.FeedItem getFeed(int id)
+	{
 		SQLiteDatabase db = this.getReadableDatabase();
 
 		Cursor cursor = db.query(
@@ -161,8 +166,9 @@ public class FeedDB extends SQLiteOpenHelper {
 	 *
 	 * @return A list of FeedItem objects
 	 */
-	public List<com.corelib.FeedItem> getAllFeed() {
-		List<com.corelib.FeedItem> feedList = new ArrayList<com.corelib.FeedItem>();
+	public List<com.corelib.FeedItem> getAllFeed()
+	{
+		List<com.corelib.FeedItem> feedList = new ArrayList<>();
 
 		String selectQuery = "SELECT  * FROM " + FeedDB.TABLE_NAME;
 		SQLiteDatabase db = this.getWritableDatabase();
@@ -183,7 +189,8 @@ public class FeedDB extends SQLiteOpenHelper {
 	 *
 	 * @return The number of feeds
 	 */
-	public int getFeedCount() {
+	public int getFeedCount()
+	{
 		String countQuery = "SELECT  * FROM " + FeedDB.TABLE_NAME;
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor cursor = db.rawQuery(countQuery, null);
@@ -197,7 +204,8 @@ public class FeedDB extends SQLiteOpenHelper {
 	 * @param feedItem A FeedItem object
 	 * @return The number of rows affected
 	 */
-	public int updateFeed(com.corelib.FeedItem feedItem) {
+	public int updateFeed(com.corelib.FeedItem feedItem)
+	{
 		SQLiteDatabase db = this.getWritableDatabase();
 
 		ContentValues contentValues = this.populate(feedItem);
@@ -212,7 +220,8 @@ public class FeedDB extends SQLiteOpenHelper {
 	 *
 	 * @param id The FeedItem id
 	 */
-	public void deleteFeed(int id) {
+	public void deleteFeed(int id)
+	{
 		SQLiteDatabase db = this.getWritableDatabase();
 		db.delete(FeedDB.TABLE_NAME, FeedDB.FIELD_ID + " = ?",
 				new String[] { String.valueOf(id) });
@@ -223,7 +232,8 @@ public class FeedDB extends SQLiteOpenHelper {
 	 * Delete all feeds
 	 *
 	 */
-	public void deleteAllFeed() {
+	public void deleteAllFeed()
+	{
 		SQLiteDatabase db = this.getWritableDatabase();
 		db.execSQL("DELETE FROM " + FeedDB.TABLE_NAME);
 		db.execSQL("VACUUM");
@@ -236,7 +246,8 @@ public class FeedDB extends SQLiteOpenHelper {
 	 * @param feedItem A FeedItem object
 	 * @return The content value object
 	 */
-	private ContentValues populate(com.corelib.FeedItem feedItem) {
+	private ContentValues populate(com.corelib.FeedItem feedItem)
+	{
 		ContentValues contentValues = new ContentValues();
 		contentValues.put(FeedDB.FIELD_TITLE, feedItem.getTitle());
 		contentValues.put(FeedDB.FIELD_LINK, feedItem.getLink());
@@ -253,7 +264,8 @@ public class FeedDB extends SQLiteOpenHelper {
 	 * @param cursor A sqlite cursor
 	 * @return A FeedItem Object
 	 */
-	private com.corelib.FeedItem populate(Cursor cursor) {
+	private com.corelib.FeedItem populate(Cursor cursor)
+	{
 		com.corelib.FeedItem feedItem = new com.corelib.FeedItem();
 		feedItem.setId(Integer.parseInt(cursor.getString(0)));
 		feedItem.setTitle(cursor.getString(1));

@@ -14,7 +14,6 @@ import android.webkit.WebViewClient;
  */
 class WebClient extends WebViewClient {
 
-	// Properties
 	private String domain;
 
 	/**
@@ -22,7 +21,8 @@ class WebClient extends WebViewClient {
 	 *
 	 * @param domain The domain
 	 */
-	public WebClient(String domain) {
+	public WebClient(String domain)
+	{
 		this.domain = domain;
 	}
 
@@ -36,7 +36,8 @@ class WebClient extends WebViewClient {
 	 * @return boolean
 	 */
 	@Override
-	public boolean shouldOverrideUrlLoading(WebView view, String url) {
+	public boolean shouldOverrideUrlLoading(WebView view, String url)
+	{
 		if(Uri.parse(url).getHost().endsWith(this.domain)) {
 			return false;
 		}

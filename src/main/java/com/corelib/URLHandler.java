@@ -11,7 +11,7 @@ import java.net.URL;
  * @author	Eric Potvin
  * @version 1.0
  */
-public class URLHandler {
+class URLHandler {
 
 	private URL url;
 
@@ -20,7 +20,8 @@ public class URLHandler {
 	 *
 	 * @param url The URL
 	 */
-	public URLHandler(URL url) {
+	public URLHandler(URL url)
+	{
 		this.url = url;
 	}
 
@@ -30,7 +31,8 @@ public class URLHandler {
 	 * @param url The URL
 	 * @throws MalformedURLException Bad URL format
 	 */
-	public URLHandler(String url) throws MalformedURLException {
+	public URLHandler(String url) throws MalformedURLException
+	{
 		this(new URL(url));
 	}
 
@@ -39,7 +41,8 @@ public class URLHandler {
 	 *
 	 * @return path
 	 */
-	public String getPath() {
+	public String getPath()
+	{
 		return this.url.getPath();
 	}
 
@@ -50,8 +53,8 @@ public class URLHandler {
 	 * @return The name of the file from that URL
 	 * @throws Exception URL Exception
 	 */
-	public static String getNameFromUrl(String url) throws Exception {
-
+	public static String getNameFromUrl(String url) throws Exception
+	{
 		URLHandler urlHandler = new URLHandler(url);
 		String path = urlHandler.getPath();
 

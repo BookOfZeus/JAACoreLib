@@ -21,7 +21,8 @@ class Utils {
 	 * @param str The string
 	 * @return The capitalized string
 	 */
-	public static String capitalize(String str) {
+	public static String capitalize(String str)
+	{
 		return Character.toUpperCase(str.charAt(0)) + str.substring(1);
 	}
 
@@ -32,7 +33,8 @@ class Utils {
 	 * @param n Number of characters
 	 * @return The padded string
 	 */
-	public static String padRight(String s, int n) {
+	public static String padRight(String s, int n)
+	{
 		return String.format("%1$-" + n + "s", s);  
 	}
 
@@ -43,7 +45,8 @@ class Utils {
 	 * @param n Number of characters
 	 * @return The padded string
 	 */
-	public static String padLeft(String s, int n) {
+	public static String padLeft(String s, int n)
+	{
 		return String.format("%1$" + n + "s", s);  
 	}
 
@@ -54,7 +57,8 @@ class Utils {
 	 * @param pixels The pixels size
 	 * @return size in DP
 	 */
-	public static int convertPXToDP(float density, int pixels) {
+	public static int convertPXToDP(float density, int pixels)
+	{
 		return (int) Math.ceil(pixels * density + 0.5f);
 	}
 

@@ -10,7 +10,7 @@ import android.util.Log;
  * @author	Eric Potvin
  * @version 1.0
  */
-public class Debug {
+class Debug {
 
 	/**
 	 * Enable or disable debug
@@ -18,9 +18,10 @@ public class Debug {
 	private static final boolean ENABLE = true;
 
 	/**
-	 * Contructor()
+	 * Constructor()
 	 */
-	public Debug() {
+	public Debug()
+	{
 	}
 
 	/**
@@ -31,7 +32,8 @@ public class Debug {
 	 * @param msg The message
 	 * @param method The class method called
 	 */
-	public static void v(String tag, String msg, String method) {
+	public static void v(String tag, String msg, String method)
+	{
 		if(Debug.ENABLE) {
 			Log.v(" -- " + tag + ": ", "(" + method + ") " + msg);
 		}
@@ -44,7 +46,8 @@ public class Debug {
 	 * @param tag The class tag
 	 * @param msg The message
 	 */
-	public static void v(String tag, String msg) {
+	public static void v(String tag, String msg)
+	{
 		if(Debug.ENABLE) {
 			Log.v(" -- " + tag + ": ", msg);
 		}

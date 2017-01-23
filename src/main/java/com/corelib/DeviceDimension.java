@@ -12,7 +12,7 @@ import android.util.DisplayMetrics;
  * @author	Eric Potvin
  * @version 1.0
  */
-public class DeviceDimension {
+class DeviceDimension {
 
 	/**
 	 * Maximum pixels for small devices (portrait)
@@ -29,14 +29,14 @@ public class DeviceDimension {
 	 * @param orientation The phone orientation
 	 * @return boolean
 	 */
-	public static boolean isSmall(Activity activity, int orientation) {
+	public static boolean isSmall(Activity activity, int orientation)
+	{
 
 		DisplayMetrics metrics = new DisplayMetrics();
 		activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
 		int width = metrics.widthPixels;
-		return width < DeviceDimension.MAX_PORTRAIT_WIDTH && orientation == Configuration.ORIENTATION_PORTRAIT
-			? true
-			: width < DeviceDimension.MAX_LANDSCAPE_WIDTH && orientation == Configuration.ORIENTATION_LANDSCAPE;
+		return width < DeviceDimension.MAX_PORTRAIT_WIDTH && orientation == Configuration.ORIENTATION_PORTRAIT ||
+			width < DeviceDimension.MAX_LANDSCAPE_WIDTH && orientation == Configuration.ORIENTATION_LANDSCAPE;
 	}
 }
 

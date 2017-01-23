@@ -36,15 +36,15 @@ public class HashTest {
 
 	/**
 	 * Testing
-	 *   ithinkitsworking = D2403E6D2D912F61F9F6CAC28B987CE9
+	 *   i_think_this_is_working = ec00a286a1b837f84d8fbb9539720756
 	 *
 	 * @throws Exception will throw an exception if error
 	 */
 	@Test
 	public void testBase64LongString() throws Exception
 	{
-		String p = Hash.md5("ithinkitsworking");
-		assertTrue(p.equalsIgnoreCase("D2403E6D2D912F61F9F6CAC28B987CE9"));
+		String p = Hash.md5("i_think_this_is_working");
+		assertTrue(p.equalsIgnoreCase("ec00a286a1b837f84d8fbb9539720756"));
 	}
 }
 

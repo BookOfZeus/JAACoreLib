@@ -48,14 +48,13 @@ class Password {
 	 */
 	private boolean useSpecial;
 
-	/**
-	 * Contructor()
-	 */
-	public Password() {
-		this.useUpper = true;
-		this.useLower = true;
-		this.useDigit = true;
-		this.useSpecial = true;
+
+	public Password(boolean useUpper, boolean useLower, boolean useDigit, boolean useSpecial)
+	{
+		this.useUpper = useUpper;
+		this.useLower = useLower;
+		this.useDigit = useDigit;
+		this.useSpecial = useSpecial;
 	}
 
 	/**
@@ -64,7 +63,8 @@ class Password {
 	 *
 	 * @return String
 	 */
-	public String generate() {
+	public String generate()
+	{
 		return this.generate(8);
 	}
 
@@ -75,7 +75,8 @@ class Password {
 	 * @param len Length of the string
 	 * @return String
 	 */
-	public String generate(int len) {
+	public String generate(int len)
+	{
 		len = Math.min(len, 14);
 
 		StringBuilder out = new StringBuilder("");
@@ -100,56 +101,17 @@ class Password {
 	}
 
 	/**
-	 * setUseUpper()
-	 * Enable or disable the usage of upper case letters
-	 *
-	 * @param useUpper Use the upper case or not
-	 */
-	public void setUseUpper(boolean useUpper) {
-		this.useUpper = useUpper;
-	}
-
-	/**
-	 * setUseLower()
-	 * Enable or disable the usage of lower case letters
-	 *
-	 * @param useLower Use the lower case or not
-	 */
-	public void setUseLower(boolean useLower) {
-		this.useLower = useLower;
-	}
-
-	/**
-	 * setUseDigit()
-	 * Enable or disable the usage of numbers
-	 *
-	 * @param useDigit Use numbers or not
-	 */
-	public void setUseDigit(boolean useDigit) {
-		this.useDigit = useDigit;
-	}
-
-	/**
-	 * setUseSpecial()
-	 * Enable or disable the usage of special characters
-	 *
-	 * @param useSpecial Use special chars or not
-	 */
-	public void setUseSpecial(boolean useSpecial) {
-		this.useSpecial = useSpecial;
-	}
-
-	/**
 	 * getScore()
 	 * Get the score of a password (out of 100)
 	 *
 	 * @param pass The password
 	 * @return Integer
 	 */
-	public static double getScore(String pass) {
+	public static double getScore(String pass)
+	{
 		int len = pass.length();
 		double score = 100;
-		char c = '\0';
+		char c;
 
 		int cntAlphaU = 0;
 		int cntAlphaL = 0;
@@ -185,7 +147,7 @@ class Password {
 		score -= (cntSpecial == 0 ? 25 : 0);
 
 		// calculate delta between non zero values
-		List<Integer> delta = new ArrayList<Integer>();
+		List<Integer> delta = new ArrayList<>();
 		if(cntDigit > 0) {
 			delta.add(cntDigit);
 		}
@@ -204,7 +166,7 @@ class Password {
 		int ls = delta.size();
 		int min = Integer.MAX_VALUE;
 		int max = Integer.MIN_VALUE;
-		double factor = Password.getFactor(len) * (100 / (double)score);
+		double factor = Password.getFactor(len) * (100 / score);
 
 		if(ls > 2) {
 			for(int i = ls; i > 1; i--) {
@@ -229,7 +191,8 @@ class Password {
 	 * @param len Length
 	 * @return Integer
 	 */
-	private static int getFactor(int len) {
+	private static int getFactor(int len)
+	{
 		if(len < 8) {
 			return (8 - len) * -1;
 		}

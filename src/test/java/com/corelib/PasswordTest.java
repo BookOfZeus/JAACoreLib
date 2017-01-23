@@ -13,11 +13,11 @@ public class PasswordTest {
 	{
 		String p;
 
-		Password p1 = new Password();
+		Password p1 = new Password(true, true, true, true);
 		p = p1.generate();
 		assertTrue(p.length() == 8);
 
-		Password p2 = new Password();
+		Password p2 = new Password(true, true, true, true);
 		p = p2.generate(1444);
 		assertTrue(p.length() == 14);
 	}
@@ -25,10 +25,7 @@ public class PasswordTest {
 	@Test
 	public void testPasswordGenerateLower()
 	{
-		Password pLower = new Password();
-		pLower.setUseUpper(false);
-		pLower.setUseDigit(false);
-		pLower.setUseSpecial(false);
+		Password pLower = new Password(false, true, false, false);
 
 		String pass = pLower.generate(4);
 		double score = Password.getScore(pass);
@@ -38,10 +35,7 @@ public class PasswordTest {
 	@Test
 	public void testPasswordGenerateUpper()
 	{
-		Password pUpper = new Password();
-		pUpper.setUseLower(false);
-		pUpper.setUseDigit(false);
-		pUpper.setUseSpecial(false);
+		Password pUpper = new Password(true, false, false, false);
 
 		String pass = pUpper.generate(4);
 		double score = Password.getScore(pass);
@@ -51,10 +45,7 @@ public class PasswordTest {
 	@Test
 	public void testPasswordGenerateDigit()
 	{
-		Password pDigit = new Password();
-		pDigit.setUseLower(false);
-		pDigit.setUseUpper(false);
-		pDigit.setUseSpecial(false);
+		Password pDigit = new Password(false, false, true, false);
 
 		String pass = pDigit.generate(4);
 		double score = Password.getScore(pass);
@@ -64,10 +55,7 @@ public class PasswordTest {
 	@Test
 	public void testPasswordGenerateSpecial()
 	{
-		Password pSpec = new Password();
-		pSpec.setUseLower(false);
-		pSpec.setUseUpper(false);
-		pSpec.setUseSpecial(false);
+		Password pSpec = new Password(false, false, false, true);
 
 		String pass = pSpec.generate(4);
 		double score = Password.getScore(pass);
@@ -77,17 +65,13 @@ public class PasswordTest {
 	@Test
 	public void testPasswordGenerateDigitSpecial()
 	{
-		Password pDS = new Password();
-		pDS.setUseLower(false);
-		pDS.setUseUpper(false);
+		Password pDS = new Password(false, false, true, true);
 
 		String pass = pDS.generate(4);
 		double score = Password.getScore(pass);
 		assertTrue(score >= 33);
 
-		Password pDS2 = new Password();
-		pDS2.setUseLower(false);
-		pDS2.setUseUpper(false);
+		Password pDS2 = new Password(false,false, true,true);
 
 		pass = pDS2.generate(8);
 		score = Password.getScore(pass);

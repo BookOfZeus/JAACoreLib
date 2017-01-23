@@ -33,7 +33,8 @@ class XMLParser {
 	 * Constructor
 	 *
 	 */
-	public XMLParser() {
+	public XMLParser()
+	{
 	}
 
 	/**
@@ -43,18 +44,14 @@ class XMLParser {
 	 * @return The content of the XML file (can be empty if the URL is not provided)
 	 * @throws java.io.IOException File not found
 	 */
-	public String getXml(String file) throws IOException {
+	public String getXml(String file) throws IOException
+	{
 		String data = "";
 		if(file.equals("")) {
 			return data;
 		}
-		try {
-			com.corelib.FileCache f = new com.corelib.FileCache(file);
-			data = f.read();
-		}
-		catch (IOException e) {
-			throw e;
-		}
+		FileCache f = new FileCache(file);
+		data = f.read();
 		return data;
 	}
 
@@ -67,28 +64,17 @@ class XMLParser {
 	 * @throws org.xml.sax.SAXException SAX Error
 	 * @throws java.io.IOException File not found
 	 */
-	public Document getDomElement(String xml) throws ParserConfigurationException, SAXException, IOException {
+	public Document getDomElement(String xml) throws ParserConfigurationException, SAXException, IOException
+	{
 		Document doc;
 		if(xml.equals("")) {
 			return null;
 		}
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-		try {
-			DocumentBuilder db = dbf.newDocumentBuilder();
-			InputSource is = new InputSource();
-			is.setCharacterStream(new StringReader(xml));
-			doc = db.parse(is);
-		}
-		catch (ParserConfigurationException parserEx) {
-			throw parserEx;
-		}
-		catch (SAXException saxEx) {
-			throw saxEx;
-		}
-		catch (IOException e) {
-			throw e;
-		}
-		return doc;
+		DocumentBuilder db = dbf.newDocumentBuilder();
+		InputSource is = new InputSource();
+		is.setCharacterStream(new StringReader(xml));
+		return db.parse(is);
 	}
 
 	/**
@@ -97,7 +83,8 @@ class XMLParser {
 	 * @param item The element
 	 * @return The element value
 	 */
-	public String getValue(Element item, String str) {
+	public String getValue(Element item, String str)
+	{
 		if(item == null || str.equals("")) {
 			return "";
 		}

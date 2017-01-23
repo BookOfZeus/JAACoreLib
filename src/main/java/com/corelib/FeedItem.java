@@ -24,7 +24,8 @@ public class FeedItem {
 	 * Constructor
 	 *
 	 */
-	public FeedItem() {
+	public FeedItem()
+	{
 		this.id = 0;
 		this.title = "";
 		this.link = "";
@@ -42,7 +43,8 @@ public class FeedItem {
 	 * @return Success or failure
 	 */
 	@Override
-	public String toString() {
+	public String toString()
+	{
 		return this.title + "\n" + this.date + "\n" + category;
 	}
 
@@ -51,7 +53,8 @@ public class FeedItem {
 	 *
 	 * @return The id
 	 */
-	public int getId() {
+	public int getId()
+	{
 		return id;
 	}
 
@@ -60,7 +63,8 @@ public class FeedItem {
 	 *
 	 * @param id The id
 	 */
-	public void setId(int id) {
+	public void setId(int id)
+	{
 		this.id = id;
 	}
 
@@ -69,7 +73,8 @@ public class FeedItem {
 	 *
 	 * @return The title
 	 */
-	public String getTitle() {
+	public String getTitle()
+	{
 		return title;
 	}
 
@@ -78,7 +83,8 @@ public class FeedItem {
 	 *
 	 * @param title The title
 	 */
-	public void setTitle(String title) {
+	public void setTitle(String title)
+	{
 		this.title = title;
 	}
 
@@ -87,7 +93,8 @@ public class FeedItem {
 	 *
 	 * @return The link
 	 */
-	public String getLink() {
+	public String getLink()
+	{
 		return link;
 	}
 
@@ -96,7 +103,8 @@ public class FeedItem {
 	 *
 	 * @param link The link
 	 */
-	public void setLink(String link) {
+	public void setLink(String link)
+	{
 		this.link = link;
 	}
 
@@ -105,7 +113,8 @@ public class FeedItem {
 	 *
 	 * @return The guid
 	 */
-	public String getGuid() {
+	public String getGuid()
+	{
 		return guid;
 	}
 
@@ -114,7 +123,8 @@ public class FeedItem {
 	 *
 	 * @param guid The guid
 	 */
-	public void setGuid(String guid) {
+	public void setGuid(String guid)
+	{
 		this.guid = guid;
 	}
 
@@ -123,7 +133,8 @@ public class FeedItem {
 	 *
 	 * @return The category
 	 */
-	public String getCategory() {
+	public String getCategory()
+	{
 		return category;
 	}
 
@@ -132,7 +143,8 @@ public class FeedItem {
 	 *
 	 * @param category The category
 	 */
-	public void setCategory(String category) {
+	public void setCategory(String category)
+	{
 		this.category = category;
 	}
 
@@ -141,7 +153,8 @@ public class FeedItem {
 	 *
 	 * @return The description
 	 */
-	public String getDescription() {
+	public String getDescription()
+	{
 		return description;
 	}
 
@@ -150,7 +163,8 @@ public class FeedItem {
 	 *
 	 * @param description The description
 	 */
-	public void setDescription(String description) {
+	public void setDescription(String description)
+	{
 		this.description = description;
 	}
 
@@ -159,7 +173,8 @@ public class FeedItem {
 	 *
 	 * @return The date
 	 */
-	public String getDate() {
+	public String getDate()
+	{
 		return date;
 	}
 
@@ -168,7 +183,8 @@ public class FeedItem {
 	 *
 	 * @param date The date
 	 */
-	public void setDate(String date) {
+	public void setDate(String date)
+	{
 		this.date = date;
 	}
 
@@ -177,7 +193,8 @@ public class FeedItem {
 	 *
 	 * @return The source
 	 */
-	public String getSource() {
+	public String getSource()
+	{
 		return source;
 	}
 
@@ -186,7 +203,8 @@ public class FeedItem {
 	 *
 	 * @param source The source
 	 */
-	public void setSource(String source) {
+	public void setSource(String source)
+	{
 		this.source = source;
 	}
 
@@ -195,7 +213,8 @@ public class FeedItem {
 	 *
 	 * @return The image
 	 */
-	public String getImage() {
+	public String getImage()
+	{
 		return image;
 	}
 
@@ -204,7 +223,8 @@ public class FeedItem {
 	 *
 	 * @param image The image
 	 */
-	public void setImage(String image) {
+	public void setImage(String image)
+	{
 		this.image = image;
 	}
 }

@@ -21,7 +21,8 @@ class Timer {
 	 * @param sec The number of seconds
 	 * @return Formatted time (hh:mm:ss)
 	 */
-	public static String convertSecondsToMinutes(long sec) {
+	public static String convertSecondsToMinutes(long sec)
+	{
 		long seconds = sec % Timer.SECONDS_IN_MINUTE;
 		long minutes = (sec / Timer.SECONDS_IN_MINUTE) % Timer.MINUTES_IN_HOUR;
 

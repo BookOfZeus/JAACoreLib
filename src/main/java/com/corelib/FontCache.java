@@ -12,9 +12,9 @@ import java.util.Hashtable;
  * @author	Eric Potvin
  * @version 1.0
  */
-public class FontCache {
+class FontCache {
 
-	private static Hashtable<String, Typeface> fontCache = new Hashtable<String, Typeface>();
+	private static Hashtable<String, Typeface> fontCache = new Hashtable<>();
 
 	/**
 	 * Get the font
@@ -23,7 +23,8 @@ public class FontCache {
 	 * @param context The application context
 	 * @return TypeFace
 	 */
-	public static Typeface get(String name, Context context) {
+	public static Typeface get(String name, Context context)
+	{
 		Typeface tf = fontCache.get(name);
 		if(tf == null) {
 			try {

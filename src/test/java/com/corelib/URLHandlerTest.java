@@ -16,7 +16,7 @@ public class URLHandlerTest {
 	private static String url2 = URLHandlerTest.DOMAIN + "test.php";
 	private static String url3 = URLHandlerTest.DOMAIN + "test.php?awesome=1";
 	private static String url4 = URLHandlerTest.DOMAIN + "test/";
-	private static String url5 = URLHandlerTest.DOMAIN + "test/anotherTest";
+	private static String url5 = URLHandlerTest.DOMAIN + "test/another_test";
 	private static String url6 = URLHandlerTest.DOMAIN + "articles/create-an-android-virtual-device/";
 
 	@Test
@@ -37,7 +37,7 @@ public class URLHandlerTest {
 	public void testURLHandlerGetNameFromUrl() throws Exception
 	{
 		String name1 = "Test";
-		String name2 = "Anothertest";
+		String name2 = "Another_test";
 
 		// "test.php"
 		String urlName1 = URLHandler.getNameFromUrl(url2);
