@@ -13,18 +13,18 @@ To build/compile
 
 To clean:
 
-	maven clean
+	mvn clean
 
 ## Documentation
 
 ###Java Doc
 
-    maven javadoc:javadoc
+    mvn javadoc:javadoc
 
 ###Site
 
-    maven site
+    mvn site
 
 ## Test
 
-    maven test
+    mvn test
