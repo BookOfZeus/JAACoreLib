@@ -149,7 +149,7 @@ class FileCache {
 	/**
 	 * Check if a file exists
 	 *
-	 * @return Success of failure
+	 * @return boolean
 	 */
 	public boolean fileExists()
 	{
@@ -159,7 +159,7 @@ class FileCache {
 	/**
 	 * Create new file
 	 *
-	 * @return Success of failure
+	 * @return boolean
 	 * @throws java.io.IOException File error
 	 */
 	public boolean createFile() throws IOException {
@@ -171,7 +171,7 @@ class FileCache {
 	 *
 	 * @param type The type
 	 * @param length The length
-	 * @return Success or failure
+	 * @return boolean
 	 */
 	public boolean isOld(int type, int length)
 	{
@@ -188,7 +188,7 @@ class FileCache {
 	/**
 	 * Remove a file
 	 *
-	 * @return Success or failure
+	 * @return boolean
 	 */
 	public boolean remove() {
 		return !this.fileExists() || this.file.canWrite() && this.file.delete();
@@ -217,7 +217,7 @@ class FileCache {
 	 *
 	 * @param folder The asset folder
 	 * @param c The context
-	 * @return Success or failure
+	 * @return boolean
 	 * @throws IOException File Error
 	 */
 	public static boolean copyAssets(String folder, Context c) throws IOException

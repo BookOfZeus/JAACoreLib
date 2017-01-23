@@ -40,7 +40,7 @@ public class FeedItem {
 	/**
 	 * Get the string version of the object
 	 *
-	 * @return Success or failure
+	 * @return boolean
 	 */
 	@Override
 	public String toString()

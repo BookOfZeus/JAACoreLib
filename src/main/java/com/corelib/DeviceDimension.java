@@ -31,7 +31,6 @@ class DeviceDimension {
 	 */
 	public static boolean isSmall(Activity activity, int orientation)
 	{
-
 		DisplayMetrics metrics = new DisplayMetrics();
 		activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
 		int width = metrics.widthPixels;
@@ -39,4 +38,3 @@ class DeviceDimension {
 			width < DeviceDimension.MAX_LANDSCAPE_WIDTH && orientation == Configuration.ORIENTATION_LANDSCAPE;
 	}
 }
-

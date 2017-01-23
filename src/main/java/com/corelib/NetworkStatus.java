@@ -29,7 +29,7 @@ class NetworkStatus {
 	/**
 	 * Check if we have internet connection
 	 *
-	 * @return Success or failure
+	 * @return boolean
 	 */
 	public boolean canConnectToInternet()
 	{
