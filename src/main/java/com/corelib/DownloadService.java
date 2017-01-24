@@ -25,7 +25,8 @@ import java.lang.String;
  * @author	Eric Potvin
  * @version 1.0
  */
-class DownloadService extends IntentService {
+class DownloadService extends IntentService
+{
 	/**
 	 * The class tag name
 	 */
@@ -56,7 +57,6 @@ class DownloadService extends IntentService {
 	 */
 	public static final String INTENT = "IntentService";
 
-	// Properties
 	private String response;
 	private int httpCode;
 	private long length;

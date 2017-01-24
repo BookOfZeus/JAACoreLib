@@ -12,8 +12,11 @@ import android.webkit.WebViewClient;
  * @author	Eric Potvin
  * @version 1.0
  */
-class WebClient extends WebViewClient {
-
+class WebClient extends WebViewClient
+{
+	/**
+	 * Domain to check
+	 */
 	private String domain;
 
 	/**

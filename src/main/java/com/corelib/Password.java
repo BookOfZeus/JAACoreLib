@@ -13,8 +13,8 @@ import java.lang.Math;
  * @author	Eric Potvin
  * @version 1.0
  */
-class Password {
-
+class Password
+{
 	/**
 	 * Default alpha lowercase letters
 	 */

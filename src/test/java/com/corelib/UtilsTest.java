@@ -6,8 +6,8 @@ import org.junit.Test;
 /**
  * Unit test for Utils.
  */
-public class UtilsTest {
-
+public class UtilsTest
+{
 	/**
 	 * Setup test files*/
 	private static String FILENAME_TEST = "/tmp/test_random_file.txt";

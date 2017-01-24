@@ -6,8 +6,8 @@ import org.junit.Test;
 /**
  * Unit test for URLHandler.
  */
-public class URLHandlerTest {
-
+public class URLHandlerTest
+{
 	/**
 	 * Setup default test strings
 	 */

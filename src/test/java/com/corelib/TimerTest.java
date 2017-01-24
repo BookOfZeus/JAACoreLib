@@ -6,8 +6,8 @@ import org.junit.Test;
 /**
  * Unit test for Timer.
  */
-public class TimerTest {
-
+public class TimerTest
+{
 	/**
 	 * Convert 1 seconds
 	 */

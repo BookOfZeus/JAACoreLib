@@ -6,8 +6,8 @@ import org.junit.Test;
 /**
  * Unit test for Password.
  */
-public class PasswordTest {
-
+public class PasswordTest
+{
 	@Test
 	public void testPasswordLength()
 	{

@@ -1,6 +1,5 @@
 package com.corelib;
 
-import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
@@ -12,18 +11,28 @@ import android.net.NetworkInfo;
  * @author	Eric Potvin
  * @version 1.0
  */
-class NetworkStatus {
-
-	private Context context;
+class NetworkStatus
+{
+	/**
+	 * connectivityManager to use
+	 */
+	private ConnectivityManager connectivityManager;
 
 	/**
 	 * Constructor
 	 *
+	 * <pre>
+	 * {@code
+	 * NetworkStatus ns = new NetworkStatus(
+	 *   <application>.context.getSystemService(Context.CONNECTIVITY_SERVICE)
+	 * );
+	 * </pre>
+	 *
 	 * @param context The context
 	 */
-	public NetworkStatus(Context context)
+	public NetworkStatus(ConnectivityManager connectivityManager)
 	{
-		this.context = context;
+		this.connectivityManager = connectivityManager;
 	}
 
 	/**
@@ -33,11 +42,10 @@ class NetworkStatus {
 	 */
 	public boolean canConnectToInternet()
 	{
-		ConnectivityManager cm = (ConnectivityManager) this.context.getSystemService(Context.CONNECTIVITY_SERVICE);
-		if(cm == null) {
+		if(this.connectivityManager == null) {
 			return false;
 		}
-		NetworkInfo activeNetworkInfo[] = cm.getAllNetworkInfo();
+		NetworkInfo activeNetworkInfo[] = this.connectivityManager.getAllNetworkInfo();
 		if(activeNetworkInfo == null) {
 			return false;
 		}

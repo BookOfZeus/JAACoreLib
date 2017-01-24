@@ -13,8 +13,8 @@ import java.util.List;
  * @author	Eric Potvin
  * @version 1.0
  */
-class Utils {
-
+class Utils
+{
 	/**
 	 * Capitalize a string
 	 *
@@ -35,7 +35,7 @@ class Utils {
 	 */
 	public static String padRight(String s, int n)
 	{
-		return String.format("%1$-" + n + "s", s);  
+		return String.format("%1$-" + n + "s", s);
 	}
 
 	/**
@@ -47,7 +47,7 @@ class Utils {
 	 */
 	public static String padLeft(String s, int n)
 	{
-		return String.format("%1$" + n + "s", s);  
+		return String.format("%1$" + n + "s", s);
 	}
 
 	/**

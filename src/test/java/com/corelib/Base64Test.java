@@ -7,8 +7,8 @@ import java.io.UnsupportedEncodingException;
 /**
  * Unit test for Base64.
  */
-public class Base64Test {
-
+public class Base64Test
+{
 	@Test
 	public void testBase64Hello() throws UnsupportedEncodingException
 	{

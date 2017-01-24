@@ -11,8 +11,11 @@ import java.net.URL;
  * @author	Eric Potvin
  * @version 1.0
  */
-class URLHandler {
-
+class URLHandler
+{
+	/**
+	 * Url to use
+	 */
 	private URL url;
 
 	/**

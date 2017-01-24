@@ -11,8 +11,8 @@ import java.util.Calendar;
 /**
  * Unit test for FileCache.
  */
-public class FileCacheTest {
-
+public class FileCacheTest
+{
 	/**
 	 * Sample test files/content
 	 */

@@ -8,11 +8,14 @@ package com.corelib;
  * @author	Eric Potvin
  * @version 1.0
  */
-class Timer {
-
+class Timer
+{
 	public final static int MINUTES_IN_HOUR = 60;
 	public final static int SECONDS_IN_MINUTE = 60;
 
+	/**
+	 * Default separator
+	 */
 	private final static String SEPARATOR = ":";
 
 	/**

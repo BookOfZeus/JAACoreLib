@@ -6,8 +6,8 @@ import org.junit.Test;
 /**
  * Unit test for Hash.
  */
-public class HashTest {
-
+public class HashTest
+{
 	/**
 	 * Testing
 	 *   test = 098F6BCD4621D373CADE4E832627B4F6

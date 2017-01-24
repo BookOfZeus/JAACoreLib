@@ -12,8 +12,8 @@ import javax.crypto.spec.SecretKeySpec;
  * @author	Eric Potvin
  * @version 1.0
  */
-class Crypt {
-
+class Crypt
+{
 	/**
 	 * Default 16 bits public key
 	 */
@@ -79,8 +79,8 @@ class Crypt {
 	 */
 	public void showAlgorithms()
 	{
-		for (Object obj : java.security.Security.getAlgorithms("Cipher")) {             
-			System.out.println(obj);                                                      
-		}                                                                               
+		for (Object obj : java.security.Security.getAlgorithms("Cipher")) {
+			System.out.println(obj);
+		}
 	}
 }

@@ -10,8 +10,8 @@ import android.util.Log;
  * @author	Eric Potvin
  * @version 1.0
  */
-class Debug {
-
+class Debug
+{
 	/**
 	 * Enable or disable debug
 	 */

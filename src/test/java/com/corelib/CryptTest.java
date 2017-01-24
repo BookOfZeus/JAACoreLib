@@ -6,8 +6,8 @@ import org.junit.Test;
 /**
  * Unit test for Crypt.
  */
-public class CryptTest {
-
+public class CryptTest
+{
 	@Test
 	public void testCryptBasic() throws Exception
 	{

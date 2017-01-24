@@ -27,7 +27,8 @@ import java.util.Date;
  * @author	Eric Potvin
  * @version 1.0
  */
-class FileCache {
+class FileCache
+{
 	/**
 	 * The class tag name
 	 */

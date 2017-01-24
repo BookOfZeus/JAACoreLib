@@ -22,8 +22,8 @@ import javax.xml.parsers.ParserConfigurationException;
  * @author	Eric Potvin
  * @version 1.0
  */
-class XMLParser {
-
+class XMLParser
+{
 	/**
 	 * The class tag name
 	 */

@@ -12,8 +12,11 @@ import java.util.Hashtable;
  * @author	Eric Potvin
  * @version 1.0
  */
-class FontCache {
-
+class FontCache
+{
+	/**
+	 * Cached fontCache
+	 */
 	private static Hashtable<String, Typeface> fontCache = new Hashtable<>();
 
 	/**
