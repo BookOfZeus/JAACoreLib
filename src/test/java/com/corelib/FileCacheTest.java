@@ -18,9 +18,11 @@ public class FileCacheTest
 	 * Sample test files/content
 	 */
 	private static final String FOLDER_TEST = "/tmp/";
+	private static final String FOLDER_TEST_BAD = "/foobar/";
 	private static final String FILENAME_TEST = "test_random_file.txt";
-	private static final String BAD_FOLDER	= "/bad_folder";
-	private static String FILE_CONTENT	= "Java UnitTest Content";
+	private static final String FILENAME_TEST_BAD = "/test_random_file.txt";
+	private static final String BAD_FOLDER = "/bad_folder";
+	private static final String FILE_CONTENT = "Java UnitTest Content";
 
 	@Test
 	public void testFileCacheFileNotExists()
@@ -108,6 +110,20 @@ public class FileCacheTest
 	}
 
 	@Test
+	public void testFileCacheFailRead()
+	{
+		boolean exceptionThrown = false;
+		try {
+			FileCache fc = new FileCache(FileCacheTest.FILENAME_TEST_BAD);
+			fc.read();
+		}
+		catch (IOException ex) {
+			exceptionThrown = true;
+		}
+		assertTrue(exceptionThrown);
+	}
+
+	@Test
 	public void testFileCacheFileRead() throws Exception
 	{
 		int lenStrOrigin = FileCacheTest.FILE_CONTENT.length();
@@ -130,11 +146,16 @@ public class FileCacheTest
 		FileCache fc = new FileCache(file);
 
 		assertTrue(fc.isOld(Calendar.HOUR, 12));
-
 		assertTrue(fc.isOld(Calendar.MINUTE, 1));
-
 		assertFalse(fc.isOld(Calendar.YEAR, 1));
+	}
 
+	@Test
+	public void testIsOldFail()
+	{
+		FileCache fc = new FileCache(FileCacheTest.FILENAME_TEST_BAD);
+
+		assertTrue(fc.isOld(Calendar.HOUR, 12));
 	}
 
 	@Test
@@ -154,11 +175,10 @@ public class FileCacheTest
 	}
 
 	@Test
-	public void testClear() throws IOException
+	public void testClear() throws IOException, NullPointerException
 	{
 		File folder = new File("/tmp/cache");
-		if (!folder.mkdir()) {
-			// ignore
+		if (!folder.exists() && !folder.mkdir()) {
 			return;
 		}
 
@@ -168,7 +188,7 @@ public class FileCacheTest
 		FileCache fileCache2 = new FileCache("/tmp/cache", "test2.txt");
 		fileCache1.createFile();
 
-		FileCache fileCache = new FileCache("/tmp/cache");
+		FileCache fileCache = new FileCache(folder);
 		fileCache.clear();
 
 		assertFalse(fileCache1.fileExists());
@@ -176,9 +196,35 @@ public class FileCacheTest
 	}
 
 	@Test
-	public void testFileCacheFail() throws IOException
+	public void testClearFail() throws IOException
 	{
-		FileCache fileCache = new FileCache("/notexsits");
-		assertFalse(fileCache.fileExists());
+		File folder = new File("/tmp/cache");
+		if (!folder.exists() && !folder.mkdir()) {
+			return;
+		}
+
+		boolean exceptionThrown = false;
+
+		try {
+			FileCache fileCache = new FileCache(folder);
+			fileCache.clear();
+		}
+		catch (IOException ex) {
+			exceptionThrown = true;
+		}
+		assertFalse(exceptionThrown);
+	}
+
+	@Test
+	public void testFileCacheFail()
+	{
+		try {
+			File file = new File(FileCacheTest.FOLDER_TEST_BAD);
+			FileCache fileCache = new FileCache(file);
+			fileCache.fileExists();
+		}
+		catch (IOException ex) {
+			assertTrue(ex.getMessage().equals("FileCache:Unable to create directory"));
+		}
 	}
 }

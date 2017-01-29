@@ -25,7 +25,8 @@ import java.lang.String;
  * @author	Eric Potvin
  * @version 1.0
  */
-class DownloadService extends IntentService
+@SuppressWarnings("ALL")
+public class DownloadService extends IntentService
 {
 	/**
 	 * The class tag name

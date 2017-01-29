@@ -10,19 +10,13 @@ import android.util.Log;
  * @author	Eric Potvin
  * @version 1.0
  */
-class Debug
+@SuppressWarnings("ALL")
+public final class Debug
 {
 	/**
 	 * Enable or disable debug
 	 */
 	private static final boolean ENABLE = true;
-
-	/**
-	 * Constructor()
-	 */
-	public Debug()
-	{
-	}
 
 	/**
 	 * v()

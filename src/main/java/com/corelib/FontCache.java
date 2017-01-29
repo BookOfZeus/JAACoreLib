@@ -12,7 +12,8 @@ import java.util.Hashtable;
  * @author	Eric Potvin
  * @version 1.0
  */
-class FontCache
+@SuppressWarnings("ALL")
+public final class FontCache
 {
 	/**
 	 * Cached fontCache

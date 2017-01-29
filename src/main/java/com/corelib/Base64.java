@@ -10,7 +10,8 @@ import java.io.ByteArrayOutputStream;
  * @author	Eric Potvin
  * @version 1.0
  */
-class Base64
+@SuppressWarnings("ALL")
+public class Base64
 {
 	/**
 	 * Encode to base64

@@ -13,7 +13,8 @@ import java.util.Set;
  * @author	Eric Potvin
  * @version 1.0
  */
-class Crypt
+@SuppressWarnings("ALL")
+public class Crypt
 {
 	/**
 	 * Default 16 bits public key

@@ -14,7 +14,8 @@ import java.util.List;
  * @author	Eric Potvin
  * @version 1.0
  */
-class Utils
+@SuppressWarnings("ALL")
+public final class Utils
 {
 	/**
 	 * Capitalize a string

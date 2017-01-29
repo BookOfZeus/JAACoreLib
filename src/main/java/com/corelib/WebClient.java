@@ -12,7 +12,8 @@ import android.webkit.WebViewClient;
  * @author	Eric Potvin
  * @version 1.0
  */
-class WebClient extends WebViewClient
+@SuppressWarnings("ALL")
+public class WebClient extends WebViewClient
 {
 	/**
 	 * Domain to check

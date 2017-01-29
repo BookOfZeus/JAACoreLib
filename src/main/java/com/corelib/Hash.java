@@ -10,7 +10,8 @@ import java.security.MessageDigest;
  * @author	Eric Potvin
  * @version 1.0
  */
-class Hash
+@SuppressWarnings("ALL")
+public class Hash
 {
 	/**
 	 * Get the MD5 of a string

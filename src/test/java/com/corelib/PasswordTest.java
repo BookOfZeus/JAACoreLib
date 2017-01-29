@@ -67,9 +67,9 @@ public class PasswordTest
 	{
 		Password pDS = new Password(false, false, true, true);
 
-		String pass = pDS.generate(6);
+		String pass = pDS.generate(4);
 		double score = Password.getScore(pass);
-		assertTrue(score >= 20);
+		assertTrue(score >= 9);
 
 		Password pDS2 = new Password(false,false, true,true);
 

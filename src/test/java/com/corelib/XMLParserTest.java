@@ -15,7 +15,7 @@ import java.io.IOException;
  */
 public class XMLParserTest
 {
-	private static String XML_TEST = "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
+	private static final String XML_TEST = "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
 			+ "<rss version=\"2.0\">"
 			+ "<channel>"
 			+ "<title>XML Test file</title>"
@@ -52,7 +52,7 @@ public class XMLParserTest
 			+ "</channel>"
 			+ "</rss>";
 
-	private static String XML_TEST_EMPTY = "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
+	private static final String XML_TEST_EMPTY = "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
 			+ "<rss version=\"2.0\">"
 			+ "<channel>"
 			+ "<title>XML Test file</title>"
@@ -70,10 +70,8 @@ public class XMLParserTest
 	public void testXMLParserSize() throws Exception
 	{
 		com.corelib.XMLParser xmlParser = new com.corelib.XMLParser();
-		String data = XMLParserTest.XML_TEST;
 
-		// Parse feed
-		Document doc = xmlParser.getDomElement(data);
+		Document doc = xmlParser.getDomElement(XMLParserTest.XML_TEST);
 		String parent = "item"; //parent
 
 		NodeList nl = doc.getElementsByTagName(parent);
@@ -86,14 +84,12 @@ public class XMLParserTest
 	public void testXMLParserItem1() throws Exception
 	{
 		com.corelib.XMLParser xmlParser = new com.corelib.XMLParser();
-		String data = XMLParserTest.XML_TEST;
 
-		// Parse feed
-		Document doc = xmlParser.getDomElement(data);
+		Document doc = xmlParser.getDomElement(XMLParserTest.XML_TEST);
 		String parent = "item"; //parent
 
 		NodeList nl = doc.getElementsByTagName(parent);
-		int len = nl.getLength();
+		// int len = nl.getLength();
 
 		Element e = (Element) nl.item(0);
 
@@ -121,10 +117,8 @@ public class XMLParserTest
 	public void testXMLParserItem2() throws Exception
 	{
 		com.corelib.XMLParser xmlParser = new com.corelib.XMLParser();
-		String data = XMLParserTest.XML_TEST;
 
-		// Parse feed
-		Document doc = xmlParser.getDomElement(data);
+		Document doc = xmlParser.getDomElement(XMLParserTest.XML_TEST);
 		String parent = "item"; //parent
 
 		NodeList nl = doc.getElementsByTagName(parent);

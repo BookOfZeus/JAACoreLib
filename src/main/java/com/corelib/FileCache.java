@@ -1,13 +1,9 @@
 package com.corelib;
 
-import android.content.Context;
-import android.content.res.AssetManager;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileInputStream;
 import java.io.FileReader;
@@ -27,7 +23,8 @@ import java.util.Date;
  * @author	Eric Potvin
  * @version 1.0
  */
-class FileCache
+@SuppressWarnings("ALL")
+public class FileCache
 {
 	/**
 	 * The class tag name
@@ -90,7 +87,7 @@ class FileCache
 
 		if(!this.cacheDir.exists()) {
 			if (!this.cacheDir.mkdirs()) {
-				throw new IOException("Unable to create directory");
+				throw new IOException(FileCache.TAG + ":" + "Unable to create directory");
 			}
 		}
 	}
@@ -134,7 +131,7 @@ class FileCache
 	public String read() throws IOException
 	{
 		if(!this.fileExists()) {
-			throw new FileNotFoundException("File Not Found");
+			throw new IOException("File Not Found");
 		}
 		String read;
 		StringBuilder builder = new StringBuilder("");
@@ -205,9 +202,11 @@ class FileCache
 	public void clear() throws IOException
 	{
 		File[] files = cacheDir.listFiles();
-		if(files == null) {
+
+		if(files == null || files.length == 0) {
 			return;
 		}
+
 		for(File f:files) {
 			if (!f.delete()) {
 				throw new IOException("Unable to delete file");
@@ -215,14 +214,17 @@ class FileCache
 		}
 	}
 
-	/**
+	/*
 	 * Copy an assets folder to the local files folders
+	 *
+	 * @deprecated
 	 *
 	 * @param folder The asset folder
 	 * @param c The context
 	 * @return boolean
 	 * @throws IOException File Error
 	 */
+	/*
 	public static boolean copyAssets(String folder, Context c) throws IOException
 	{
 		boolean ret = false;
@@ -251,6 +253,7 @@ class FileCache
 		}
 		return ret;
 	}
+	*/
 
 	/**
 	 * Copy a source file to a destination file

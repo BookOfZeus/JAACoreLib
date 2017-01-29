@@ -8,9 +8,16 @@ package com.corelib;
  * @author	Eric Potvin
  * @version 1.0
  */
-class Timer
+@SuppressWarnings("ALL")
+public final class Timer
 {
+	/**
+	 * Number of minutes in 1 hour
+	 */
 	public final static int MINUTES_IN_HOUR = 60;
+	/**
+	 * Number of seconds in 1 minute
+	 */
 	public final static int SECONDS_IN_MINUTE = 60;
 
 	/**

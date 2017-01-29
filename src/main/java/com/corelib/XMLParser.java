@@ -22,7 +22,8 @@ import javax.xml.parsers.ParserConfigurationException;
  * @author	Eric Potvin
  * @version 1.0
  */
-class XMLParser
+@SuppressWarnings("ALL")
+public class XMLParser
 {
 	/**
 	 * The class tag name

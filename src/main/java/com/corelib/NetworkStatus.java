@@ -11,7 +11,8 @@ import android.net.NetworkInfo;
  * @author	Eric Potvin
  * @version 1.0
  */
-class NetworkStatus
+@SuppressWarnings("ALL")
+public class NetworkStatus
 {
 	/**
 	 * connectivityManager to use

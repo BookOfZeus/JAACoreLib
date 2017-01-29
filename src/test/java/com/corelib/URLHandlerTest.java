@@ -11,15 +11,15 @@ public class URLHandlerTest
 	/**
 	 * Setup default test strings
 	 */
-	private static String DOMAIN = "http://bookofzeus.com";
-	private static String url1 = URLHandlerTest.DOMAIN + "/articles/create-an-android-virtual-device";
-	private static String url2 = URLHandlerTest.DOMAIN + "/page1.html";
-	private static String url3 = URLHandlerTest.DOMAIN + "/page2.php?awesome=1";
-	private static String url4 = URLHandlerTest.DOMAIN + "/folder1/";
-	private static String url5 = URLHandlerTest.DOMAIN + "/folder2/another_test";
-	private static String url6 = URLHandlerTest.DOMAIN + "/articles/create-an-android-virtual-device/";
-	private static String url7 = URLHandlerTest.DOMAIN + "";
-	private static String url8 = URLHandlerTest.DOMAIN + "?";
+	private static final String DOMAIN = "http://bookofzeus.com";
+	private static final String url1 = URLHandlerTest.DOMAIN + "/articles/create-an-android-virtual-device";
+	private static final String url2 = URLHandlerTest.DOMAIN + "/page1.html";
+	private static final String url3 = URLHandlerTest.DOMAIN + "/page2.php?awesome=1";
+	private static final String url4 = URLHandlerTest.DOMAIN + "/folder1/";
+	private static final String url5 = URLHandlerTest.DOMAIN + "/folder2/another_test";
+	private static final String url6 = URLHandlerTest.DOMAIN + "/articles/create-an-android-virtual-device/";
+	private static final String url7 = URLHandlerTest.DOMAIN + "";
+	private static final String url8 = URLHandlerTest.DOMAIN + "?";
 
 	@Test
 	public void testURL_1_6() throws Exception

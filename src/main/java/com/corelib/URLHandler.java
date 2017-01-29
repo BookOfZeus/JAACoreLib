@@ -11,7 +11,8 @@ import java.net.URL;
  * @author	Eric Potvin
  * @version 1.0
  */
-class URLHandler
+@SuppressWarnings("ALL")
+public class URLHandler
 {
 	/**
 	 * Url to use

@@ -12,7 +12,8 @@ import android.util.DisplayMetrics;
  * @author	Eric Potvin
  * @version 1.0
  */
-class DeviceDimension
+@SuppressWarnings("ALL")
+public class DeviceDimension
 {
 	/**
 	 * Maximum pixels for small devices (portrait)
