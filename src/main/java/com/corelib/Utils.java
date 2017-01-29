@@ -22,7 +22,7 @@ public final class Utils
 	 */
 	private Utils() throws InstantiationException
 	{
-		throw new InstantiationException("Create an instance of Timer is forbidden");
+		throw new InstantiationException("Create an instance of Utils is forbidden");
 	}
 
 	/**

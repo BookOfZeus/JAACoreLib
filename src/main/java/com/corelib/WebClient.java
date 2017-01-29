@@ -31,6 +31,16 @@ public class WebClient extends WebViewClient
 	}
 
 	/**
+	 * Get the domain
+	 *
+	 * @return String
+	 */
+	public String getDomain()
+	{
+		return this.domain;
+	}
+
+	/**
 	 * shouldOverrideUrlLoading()
 	 *
 	 * Prevent domain injections

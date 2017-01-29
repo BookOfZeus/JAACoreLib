@@ -1,6 +1,7 @@
 package com.corelib;
 
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.graphics.Typeface;
 import java.util.Hashtable;
 
@@ -21,18 +22,26 @@ public final class FontCache
 	private static Hashtable<String, Typeface> fontCache = new Hashtable<>();
 
 	/**
+	 * constructor
+	 */
+	private FontCache() throws InstantiationException
+	{
+		throw new InstantiationException("Create an instance of FontCache is forbidden");
+	}
+
+	/**
 	 * Get the font
 	 *
 	 * @param name The font name
-	 * @param context The application context
+	 * @param assetManager The application asset manager
 	 * @return TypeFace
 	 */
-	public static Typeface get(String name, Context context)
+	public static Typeface get(String name, AssetManager assetManager)
 	{
 		Typeface tf = fontCache.get(name);
 		if(tf == null) {
 			try {
-				tf = Typeface.createFromAsset(context.getAssets(), name);
+				tf = Typeface.createFromAsset(assetManager, name);
 			}
 			catch (Exception e) {
 				return null;

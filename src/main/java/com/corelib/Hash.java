@@ -18,7 +18,7 @@ public class Hash
 	 */
 	private Hash() throws InstantiationException
 	{
-		throw new InstantiationException("Create an instance of Timer is forbidden");
+		throw new InstantiationException("Create an instance of Hash is forbidden");
 	}
 
 	/**

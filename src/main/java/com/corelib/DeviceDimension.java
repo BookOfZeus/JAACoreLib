@@ -29,7 +29,7 @@ public final class DeviceDimension
 	 */
 	private DeviceDimension() throws InstantiationException
 	{
-		throw new InstantiationException("Create an instance of Timer is forbidden");
+		throw new InstantiationException("Create an instance of DeviceDimension is forbidden");
 	}
 
 	/**
