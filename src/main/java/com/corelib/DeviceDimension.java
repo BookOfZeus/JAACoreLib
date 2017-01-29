@@ -1,8 +1,6 @@
 package com.corelib;
 
-import android.app.Activity;
 import android.content.res.Configuration;
-import android.util.DisplayMetrics;
 
 /**
  * DeviceDimension.java
