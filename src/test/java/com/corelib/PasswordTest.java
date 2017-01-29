@@ -67,9 +67,9 @@ public class PasswordTest
 	{
 		Password pDS = new Password(false, false, true, true);
 
-		String pass = pDS.generate(4);
+		String pass = pDS.generate(6);
 		double score = Password.getScore(pass);
-		assertTrue(score >= 33);
+		assertTrue(score >= 20);
 
 		Password pDS2 = new Password(false,false, true,true);
 
@@ -160,5 +160,14 @@ public class PasswordTest
 
 		score = Password.getScore("ZYUSMBJSSKJAJGWQ");
 		assertTrue(score == 61);
+	}
+
+	@Test
+	public void testShortPassword()
+	{
+		double score;
+
+		score = Password.getScore("a");
+		assertTrue(score == 0);
 	}
 }

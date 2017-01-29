@@ -3,6 +3,7 @@ package com.corelib;
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
+import java.util.Set;
 
 /**
  * Crypt.java
@@ -75,12 +76,12 @@ class Crypt
 
 	/**
 	 * showAlgorithms()
-	 * Show the list of algorithms
+	 * Get the list of available algorithms
+	 *
+	 * @return Set<String>
 	 */
-	public void showAlgorithms()
+	public static Set<String> getAvailableAlgorithms()
 	{
-		for (Object obj : java.security.Security.getAlgorithms("Cipher")) {
-			System.out.println(obj);
-		}
+		return java.security.Security.getAlgorithms("Cipher");
 	}
 }

@@ -69,10 +69,6 @@ class URLHandler
 		}
 		path = path.substring( path.lastIndexOf('/') +1, path.length());
 
-		if(path.contains("?")) {
-			path = path.substring(0, path.lastIndexOf('?'));
-		}
-
 		if(path.contains(".")) {
 			path = path.substring(0, path.lastIndexOf('.'));
 		}

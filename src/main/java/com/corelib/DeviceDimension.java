@@ -44,6 +44,7 @@ class DeviceDimension
 	{
 		this.activity = activity;
 	}
+
 	/**
 	 * Check if the screen is small
 	 * @param orientation The phone orientation

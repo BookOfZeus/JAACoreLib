@@ -1,5 +1,6 @@
 package com.corelib;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
@@ -67,22 +68,24 @@ class Utils
 	 *
 	 * @param is Input stream
 	 * @param os Output stream
+	 * @return boolean
 	 */
-	public static void CopyStream(InputStream is, OutputStream os)
+	public static boolean copyStream(InputStream is, OutputStream os)
 	{
 		final int buffer_size = 1024;
 		try {
-			byte[] bytes=new byte[buffer_size];
+			byte[] bytes = new byte[buffer_size];
 			for(;;) {
-				int count=is.read(bytes, 0, buffer_size);
-				if(count==-1) {
+				int count = is.read(bytes, 0, buffer_size);
+				if(count == -1) {
 					break;
 				}
 				os.write(bytes, 0, count);
 			}
+			return true;
 		}
-		catch(Exception ex) {
-			//
+		catch(IOException ex) {
+			return false;
 		}
 	}
 
@@ -95,7 +98,7 @@ class Utils
 	public static StringBuilder shuffle(String input)
 	{
 		List<Character> characters = new ArrayList<>();
-		for(char c:input.toCharArray()){
+		for(char c:input.toCharArray()) {
 			characters.add(c);
 		}
 		StringBuilder output = new StringBuilder(input.length());

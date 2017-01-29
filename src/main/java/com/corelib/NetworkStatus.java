@@ -26,9 +26,10 @@ class NetworkStatus
 	 * NetworkStatus ns = new NetworkStatus(
 	 *   <application>.context.getSystemService(Context.CONNECTIVITY_SERVICE)
 	 * );
+	 * }
 	 * </pre>
 	 *
-	 * @param context The context
+	 * @param connectivityManager The context
 	 */
 	public NetworkStatus(ConnectivityManager connectivityManager)
 	{

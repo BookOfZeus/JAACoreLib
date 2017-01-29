@@ -33,5 +33,4 @@ class Timer
 			Timer.SEPARATOR + 
 			String.format("%02d", seconds);
 	}
-
 }

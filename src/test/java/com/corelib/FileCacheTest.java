@@ -5,6 +5,7 @@ import static org.junit.Assert.assertFalse;
 
 import org.junit.Test;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
 
@@ -45,6 +46,37 @@ public class FileCacheTest
 		}
 		catch (IOException ex) {
 			// Exception thrown
+		}
+	}
+
+	@Test
+	public void testFileCacheFileCreateConstructor() throws IOException
+	{
+		FileCache fc = new FileCache(FileCacheTest.FOLDER_TEST, FileCacheTest.FILENAME_TEST);
+		assertTrue(fc.createFile());
+		fc.remove();
+
+		//
+		try {
+			fc = new FileCache(FileCacheTest.BAD_FOLDER, FileCacheTest.FILENAME_TEST);
+			fc.createFile();
+		}
+		catch (IOException ex) {
+			// Exception thrown
+		}
+	}
+
+	@Test
+	public void testFileCachePath()
+	{
+		File file = new File("/tmp/cache");
+		try {
+			FileCache fc = new FileCache(file);
+			String path = fc.getCacheDir();
+			assertTrue(path.equals(file.getAbsolutePath()));
+		}
+		catch (IOException ex) {
+			assertTrue(ex.toString().isEmpty());
 		}
 	}
 
@@ -119,5 +151,34 @@ public class FileCacheTest
 			exceptionThrown = true;
 		}
 		assertTrue(!exceptionThrown);
+	}
+
+	@Test
+	public void testClear() throws IOException
+	{
+		File folder = new File("/tmp/cache");
+		if (!folder.mkdir()) {
+			// ignore
+			return;
+		}
+
+		FileCache fileCache1 = new FileCache("/tmp/cache", "test1.txt");
+		fileCache1.createFile();
+
+		FileCache fileCache2 = new FileCache("/tmp/cache", "test2.txt");
+		fileCache1.createFile();
+
+		FileCache fileCache = new FileCache("/tmp/cache");
+		fileCache.clear();
+
+		assertFalse(fileCache1.fileExists());
+		assertFalse(fileCache2.fileExists());
+	}
+
+	@Test
+	public void testFileCacheFail() throws IOException
+	{
+		FileCache fileCache = new FileCache("/notexsits");
+		assertFalse(fileCache.fileExists());
 	}
 }

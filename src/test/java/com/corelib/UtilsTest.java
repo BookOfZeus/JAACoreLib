@@ -1,7 +1,10 @@
 package com.corelib;
 
 import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
+
+import java.io.*;
 
 /**
  * Unit test for Utils.
@@ -70,5 +73,20 @@ public class UtilsTest
 		density = 2.5f;
 		pixel = 50;
 		assertTrue(Utils.convertPXToDP(density, pixel) == 126);
+	}
+
+	@Test
+	public void testCopyStream() throws IOException
+	{
+		InputStream inputStream = new ByteArrayInputStream("test data".getBytes());
+		OutputStream outputStream = new ByteArrayOutputStream();
+
+		boolean result = Utils.copyStream(inputStream, outputStream);
+		assertTrue(result);
+
+		inputStream.close();
+
+		outputStream.flush();
+		outputStream.close();
 	}
 }

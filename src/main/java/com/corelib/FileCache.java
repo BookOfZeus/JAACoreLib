@@ -73,34 +73,36 @@ class FileCache
 	/**
 	 * Constructor
 	 *
+  	 * <pre>
+	 * {@code
+	 *  if (android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED)) {
+	 *  	cacheDir = new File(android.os.Environment.getExternalStorageDirectory(), FileCache.IMAGE_CACHE_PATH);
+	 *  }
+	 * }
+	 * </pre>
+	 *
 	 * @param path The external storage mounted path
 	 * @throws IOException Write Error
 	 */
 	public FileCache(File path) throws IOException
 	{
-		if (android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED)) {
-			cacheDir = new File(android.os.Environment.getExternalStorageDirectory(), FileCache.IMAGE_CACHE_PATH);
-		}
-		else {
-			cacheDir = path;
-		}
-		if(!cacheDir.exists()) {
-			if (!cacheDir.mkdirs()) {
+		this.cacheDir = path;
+
+		if(!this.cacheDir.exists()) {
+			if (!this.cacheDir.mkdirs()) {
 				throw new IOException("Unable to create directory");
 			}
 		}
 	}
 
 	/**
-	 * Get the file from a URL
+	 * Get the cache path
 	 *
-	 * @param url The URL to fetch
-	 * @return File Object
+	 * @return String
 	 */
-	public File getFile(String url)
+	public String getCacheDir()
 	{
-		this.filename = String.valueOf(url.hashCode());
-		return new File(this.cacheDir, this.filename);
+		return this.cacheDir.getAbsolutePath();
 	}
 
 	/**

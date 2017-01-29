@@ -5,6 +5,10 @@ import org.junit.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.IOException;
 
 /**
  * Unit test for XMLParser.
@@ -48,6 +52,20 @@ public class XMLParserTest
 			+ "</channel>"
 			+ "</rss>";
 
+	private static String XML_TEST_EMPTY = "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
+			+ "<rss version=\"2.0\">"
+			+ "<channel>"
+			+ "<title>XML Test file</title>"
+			+ "<atom:link href=\"http://localhost/xml_test_file.xml\" rel=\"self\" type=\"application/rss+xml\" />"
+			+ "<link>http://localhost/xml_test_file.xml</link>"
+			+ "<description>XML Test file</description>"
+			+ "<language>en-us</language>"
+			+ "<copyright></copyright>"
+			+ "<pubDate>Thu, 15 Oct 2015 06:15:01 -0400</pubDate>"
+			+ "<item>"
+			+ "</item>"
+			+ "</channel>"
+			+ "</rss>";
 	@Test
 	public void testXMLParserSize() throws Exception
 	{
@@ -110,7 +128,7 @@ public class XMLParserTest
 		String parent = "item"; //parent
 
 		NodeList nl = doc.getElementsByTagName(parent);
-		int len = nl.getLength();
+		// int len = nl.getLength();
 
 		Element e = (Element) nl.item(1);
 
@@ -132,5 +150,27 @@ public class XMLParserTest
 		assertTrue(category.equals("Category 2"));
 		assertTrue(date.equals("Thu, 15 Oct 2015 15:52:15 -0400"));
 		assertTrue(image.equals(""));
+	}
+
+	@Test
+	public void testEmpty() throws ParserConfigurationException, SAXException, IOException
+	{
+		com.corelib.XMLParser xmlParser = new com.corelib.XMLParser();
+		Document doc = xmlParser.getDomElement("");
+
+		assertTrue(doc == null);
+
+		String data = xmlParser.getValue(null, "");
+		assertTrue(data.equals(""));
+	}
+
+	@Test
+	public void testValidEmpty() throws ParserConfigurationException, SAXException, IOException
+	{
+		com.corelib.XMLParser xmlParser = new com.corelib.XMLParser();
+		Document doc = xmlParser.getDomElement(XMLParserTest.XML_TEST_EMPTY);
+		String element = xmlParser.getValue(doc.getDocumentElement(), "item");
+
+		assertTrue(element.equals(""));
 	}
 }

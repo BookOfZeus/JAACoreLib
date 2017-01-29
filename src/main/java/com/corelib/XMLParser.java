@@ -38,24 +38,6 @@ class XMLParser
 	}
 
 	/**
-	 * Get an XML file
-	 *
-	 * @param file The full path and filename of the XML file
-	 * @return The content of the XML file (can be empty if the URL is not provided)
-	 * @throws java.io.IOException File not found
-	 */
-	public String getXml(String file) throws IOException
-	{
-		String data = "";
-		if(file.equals("")) {
-			return data;
-		}
-		FileCache f = new FileCache(file);
-		data = f.read();
-		return data;
-	}
-
-	/**
 	 * Get the DOM of the XML file
 	 *
 	 * @param xml The content of the XML file
@@ -66,7 +48,6 @@ class XMLParser
 	 */
 	public Document getDomElement(String xml) throws ParserConfigurationException, SAXException, IOException
 	{
-		Document doc;
 		if(xml.equals("")) {
 			return null;
 		}
@@ -99,10 +80,7 @@ class XMLParser
 		}
 
 		Node child, elem = n.item(0);
-		if(elem == null) {
-			return "";
-		}
-		if (!elem.hasChildNodes()) {
+		if (elem == null || !elem.hasChildNodes()) {
 			return "";
 		}
 		for(child = elem.getFirstChild(); child != null; child = child.getNextSibling()) {

@@ -3,6 +3,8 @@ package com.corelib;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
+import java.util.Set;
+
 /**
  * Unit test for Crypt.
  */
@@ -41,5 +43,13 @@ public class CryptTest
 		dec = c.decrypt(enc);
 
 		assertTrue(str.equals(dec));
+	}
+
+	@Test
+	public void testShowAlgorithms()
+	{
+		Set<String> algorithm = Crypt.getAvailableAlgorithms();
+		assertTrue(algorithm != null);
+		assertTrue(algorithm.size() != 0);
 	}
 }

@@ -86,4 +86,25 @@ public class NetworkStatusTest
 
 		assertTrue(networkStatus.canConnectToInternet());
 	}
+
+	@Test
+	public void testNoNetwork()
+	{
+		final ConnectivityManager connectivityManager = mock(ConnectivityManager.class);
+
+		// No connection available
+		when(connectivityManager.getAllNetworkInfo()).thenReturn(null);
+
+		NetworkStatus networkStatus = new NetworkStatus(connectivityManager);
+
+		assertFalse(networkStatus.canConnectToInternet());
+	}
+
+	@Test
+	public void testInvalid()
+	{
+		NetworkStatus networkStatus = new NetworkStatus(null);
+
+		assertFalse(networkStatus.canConnectToInternet());
+	}
 }
