@@ -13,7 +13,7 @@ import android.util.DisplayMetrics;
  * @version 1.0
  */
 @SuppressWarnings("ALL")
-public class DeviceDimension
+public final class DeviceDimension
 {
 	/**
 	 * Maximum pixels for small devices (portrait)
@@ -25,47 +25,33 @@ public class DeviceDimension
 	final static private int MAX_LANDSCAPE_WIDTH = 850;
 
 	/**
-	 * The activity
+	 * constructor
 	 */
-	private Activity activity;
-
-	/**
-	 * Constructor
-	 */
-	public DeviceDimension()
+	private DeviceDimension() throws InstantiationException
 	{
-		this.activity = null;
-	}
-
-	/**
-	 * Constructor
-	 * @param activity The application activity
-	 */
-	public DeviceDimension(Activity activity)
-	{
-		this.activity = activity;
+		throw new InstantiationException("Create an instance of Timer is forbidden");
 	}
 
 	/**
 	 * Check if the screen is small
+	 *
+	 * {@code
+	 * <pre>
+	 *
+	 *  DisplayMetrics metrics = new DisplayMetrics();
+	 *  activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
+	 *  DeviceDimension.isSmall(imetrics.widthPixels, <Orientation>);
+	 *  ->
+	 *
+	 * </pre>
+	 * }
+	 *
 	 * @param orientation The phone orientation
 	 * @return boolean
 	 */
-	public boolean isSmall(int orientation)
+	public static boolean isSmall(int deviceWidth, int orientation)
 	{
-		int width = this.getActivityMetricWidthPixel();
-		return width < DeviceDimension.MAX_PORTRAIT_WIDTH && orientation == Configuration.ORIENTATION_PORTRAIT ||
-			width < DeviceDimension.MAX_LANDSCAPE_WIDTH && orientation == Configuration.ORIENTATION_LANDSCAPE;
-	}
-
-	/**
-	 * Get the width in pixels
-	 * @return int
-	 */
-	protected int getActivityMetricWidthPixel()
-	{
-		DisplayMetrics metrics = new DisplayMetrics();
-		activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
-		return metrics.widthPixels;
+		return deviceWidth < DeviceDimension.MAX_PORTRAIT_WIDTH && orientation == Configuration.ORIENTATION_PORTRAIT ||
+				deviceWidth < DeviceDimension.MAX_LANDSCAPE_WIDTH && orientation == Configuration.ORIENTATION_LANDSCAPE;
 	}
 }

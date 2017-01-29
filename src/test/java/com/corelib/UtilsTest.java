@@ -1,10 +1,15 @@
 package com.corelib;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import javax.rmi.CORBA.Util;
 import java.io.*;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 
 /**
  * Unit test for Utils.
@@ -82,5 +87,23 @@ public class UtilsTest
 
 		outputStream.flush();
 		outputStream.close();
+	}
+
+	@Test
+	public void testConstructor() throws IllegalAccessException, InstantiationException
+	{
+		final Class<?> clazz = Utils.class;
+		final Constructor<?> classConstructor = clazz.getDeclaredConstructors()[0];
+		classConstructor.setAccessible(true);
+
+		Throwable targetException = null;
+
+		try {
+			classConstructor.newInstance((Object[])null);
+		} catch (InvocationTargetException ex) {
+			targetException = ex.getTargetException();
+		}
+		assertNotNull(targetException);
+		assertEquals(targetException.getClass(), InstantiationException.class);
 	}
 }

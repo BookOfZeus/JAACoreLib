@@ -1,7 +1,12 @@
 package com.corelib;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 
 /**
  * Unit test for Hash.
@@ -45,6 +50,24 @@ public class HashTest
 	{
 		String p = Hash.md5("i_think_this_is_working");
 		assertTrue(p.equalsIgnoreCase("ec00a286a1b837f84d8fbb9539720756"));
+	}
+
+	@Test
+	public void testConstructor() throws IllegalAccessException, InstantiationException
+	{
+		final Class<?> clazz = Hash.class;
+		final Constructor<?> classConstructor = clazz.getDeclaredConstructors()[0];
+		classConstructor.setAccessible(true);
+
+		Throwable targetException = null;
+
+		try {
+			classConstructor.newInstance((Object[])null);
+		} catch (InvocationTargetException ex) {
+			targetException = ex.getTargetException();
+		}
+		assertNotNull(targetException);
+		assertEquals(targetException.getClass(), InstantiationException.class);
 	}
 }
 

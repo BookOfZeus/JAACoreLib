@@ -26,6 +26,14 @@ public final class Timer
 	private final static String SEPARATOR = ":";
 
 	/**
+	 * Constructor
+	 */
+	private Timer() throws InstantiationException
+	{
+		throw new InstantiationException("Create an instance of Timer is forbidden");
+	}
+
+	/**
 	 * Convert seconds to hours:minutes:seconds
 	 *
 	 * @param sec The number of seconds

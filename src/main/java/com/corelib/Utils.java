@@ -18,6 +18,14 @@ import java.util.List;
 public final class Utils
 {
 	/**
+	 * constructor
+	 */
+	private Utils() throws InstantiationException
+	{
+		throw new InstantiationException("Create an instance of Timer is forbidden");
+	}
+
+	/**
 	 * Capitalize a string
 	 *
 	 * @param str The string

@@ -1,11 +1,12 @@
 package com.corelib;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.junit.Assert.*;
+
 import org.junit.Test;
 import android.content.res.Configuration;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 
 /**
  * Unit test for DeviceDimension.
@@ -14,29 +15,37 @@ public class DeviceDimensionTest
 {
 	@Test
 	public void testIsSmallPortrait() {
-		DeviceDimension mock = mock(DeviceDimension.class);
-		when(mock.getActivityMetricWidthPixel()).thenReturn(400);
-		when(mock.isSmall(Configuration.ORIENTATION_PORTRAIT)).thenCallRealMethod();
-		assertTrue(mock.isSmall(Configuration.ORIENTATION_PORTRAIT));
+		assertTrue(DeviceDimension.isSmall(400, Configuration.ORIENTATION_PORTRAIT));
 
-		when(mock.getActivityMetricWidthPixel()).thenReturn(549);
-		assertTrue(mock.isSmall(Configuration.ORIENTATION_PORTRAIT));
+		assertTrue(DeviceDimension.isSmall(549, Configuration.ORIENTATION_PORTRAIT));
 
-		when(mock.getActivityMetricWidthPixel()).thenReturn(551);
-		assertFalse(mock.isSmall(Configuration.ORIENTATION_PORTRAIT));
+		assertFalse(DeviceDimension.isSmall(551, Configuration.ORIENTATION_PORTRAIT));
 	}
 
 	@Test
 	public void testIsSmallLandscape() {
-		DeviceDimension mock = mock(DeviceDimension.class);
-		when(mock.getActivityMetricWidthPixel()).thenReturn(400);
-		when(mock.isSmall(Configuration.ORIENTATION_LANDSCAPE)).thenCallRealMethod();
-		assertTrue(mock.isSmall(Configuration.ORIENTATION_LANDSCAPE));
+		assertTrue(DeviceDimension.isSmall(400, Configuration.ORIENTATION_LANDSCAPE));
 
-		when(mock.getActivityMetricWidthPixel()).thenReturn(849);
-		assertTrue(mock.isSmall(Configuration.ORIENTATION_LANDSCAPE));
+		assertTrue(DeviceDimension.isSmall(849, Configuration.ORIENTATION_LANDSCAPE));
 
-		when(mock.getActivityMetricWidthPixel()).thenReturn(851);
-		assertFalse(mock.isSmall(Configuration.ORIENTATION_LANDSCAPE));
+		assertFalse(DeviceDimension.isSmall(851, Configuration.ORIENTATION_LANDSCAPE));
+	}
+
+	@Test
+	public void testConstructor() throws IllegalAccessException, InstantiationException
+	{
+		final Class<?> clazz = DeviceDimension.class;
+		final Constructor<?> classConstructor = clazz.getDeclaredConstructors()[0];
+		classConstructor.setAccessible(true);
+
+		Throwable targetException = null;
+
+		try {
+			classConstructor.newInstance((Object[])null);
+		} catch (InvocationTargetException ex) {
+			targetException = ex.getTargetException();
+		}
+		assertNotNull(targetException);
+		assertEquals(targetException.getClass(), InstantiationException.class);
 	}
 }

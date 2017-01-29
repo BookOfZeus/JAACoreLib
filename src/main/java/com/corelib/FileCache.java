@@ -110,10 +110,8 @@ public class FileCache
 	 */
 	public void save(String content) throws IOException
 	{
-		if (!this.fileExists()) {
-			if(!this.createFile()) {
-				throw new IOException(FileCache.TAG + ":" + FileCache.ERROR_CREATE_FILE);
-			}
+		if (!this.fileExists() && !this.createFile()) {
+			throw new IOException(FileCache.TAG + ":" + FileCache.ERROR_CREATE_FILE);
 		}
 		BufferedWriter bw = new BufferedWriter(
 			new FileWriter(this.filename)

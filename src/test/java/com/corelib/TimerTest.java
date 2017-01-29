@@ -1,7 +1,13 @@
 package com.corelib;
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 
 /**
  * Unit test for Timer.
@@ -36,5 +42,23 @@ public class TimerTest
 	{
 		String p = Timer.convertSecondsToMinutes(467);
 		assertTrue(p.equals("07:47"));
+	}
+
+	@Test
+	public void testConstructor() throws IllegalAccessException, InstantiationException
+	{
+		final Class<?> clazz = Timer.class;
+		final Constructor<?> classConstructor = clazz.getDeclaredConstructors()[0];
+		classConstructor.setAccessible(true);
+
+		Throwable targetException = null;
+
+		try {
+			classConstructor.newInstance((Object[])null);
+		} catch (InvocationTargetException ex) {
+			targetException = ex.getTargetException();
+		}
+		assertNotNull(targetException);
+		assertEquals(targetException.getClass(), InstantiationException.class);
 	}
 }

@@ -14,6 +14,14 @@ import java.security.MessageDigest;
 public class Hash
 {
 	/**
+	 * constructor
+	 */
+	private Hash() throws InstantiationException
+	{
+		throw new InstantiationException("Create an instance of Timer is forbidden");
+	}
+
+	/**
 	 * Get the MD5 of a string
 	 * @param str The string
 	 * @return String
