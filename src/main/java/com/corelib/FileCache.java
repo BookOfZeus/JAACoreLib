@@ -212,47 +212,6 @@ public class FileCache
 		}
 	}
 
-	/*
-	 * Copy an assets folder to the local files folders
-	 *
-	 * @deprecated
-	 *
-	 * @param folder The asset folder
-	 * @param c The context
-	 * @return boolean
-	 * @throws IOException File Error
-	 */
-	/*
-	public static boolean copyAssets(String folder, Context c) throws IOException
-	{
-		boolean ret = false;
-
-		AssetManager assetManager = c.getAssets();
-		String[] files;
-
-		files = assetManager.list(folder);
-		for(String f: files) {
-
-			InputStream in;
-			OutputStream out;
-			in = assetManager.open(folder + File.separator + f);
-			File outFile = new File(c.getFilesDir().toString() + File.separator, f);
-			out = new FileOutputStream(outFile);
-
-			// Copy
-			byte[] buffer = new byte[1024];
-			int read;
-			while((read = in.read(buffer)) != -1){
-				out.write(buffer, 0, read);
-			}
-			in.close();
-			out.close();
-			ret = true;
-		}
-		return ret;
-	}
-	*/
-
 	/**
 	 * Copy a source file to a destination file
 	 *

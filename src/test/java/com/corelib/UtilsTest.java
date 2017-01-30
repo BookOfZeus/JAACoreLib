@@ -6,7 +6,12 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
